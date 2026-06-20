@@ -1,0 +1,101 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Athina AI
+providerId: athina
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- LLM
+- Observability
+- Evaluation
+- Monitoring
+- Plans
+description: >-
+  Athina AI uses a freemium, sales-led pricing model. A free Starter tier
+  offers a monthly log allowance with analytics, prompt management, and the
+  ability to compare prompts and models. The Pro tier unlocks unlimited logs,
+  evaluations, datasets, and team seats with white-glove support; the
+  Enterprise tier adds self-hosted deployment, role-based access controls, and
+  custom models. Pro and Enterprise pricing is quote-based (contact sales), so
+  dollar amounts beyond the free tier are not reconciled here.
+notes: >-
+  Only the free tier exposes a public number (10k logs/month at $0). Pro and
+  Enterprise are contact-sales; verify included quotas, seats, and retention
+  during reconciliation against the live pricing page.
+sources:
+- https://www.athina.ai/pricing
+- https://docs.athina.ai
+plans:
+- id: athina-free
+  name: Free (Starter)
+  type: free
+  description: >-
+    Free tier with a monthly log allowance, advanced analytics, unlimited
+    prompts, and prompt/model comparison.
+  entries:
+  - label: Monthly Logs
+    name: free_logs
+    type: free
+    metric: logs
+    limit: 10000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0
+    userMultiplied: false
+  elements:
+  - name: Advanced Analytics
+  - name: Unlimited Prompts
+  - name: Compare Prompts and Models
+- id: athina-pro
+  name: Pro
+  type: subscription
+  description: >-
+    Everything in Free plus unlimited logs, evaluations, datasets, and team
+    seats, GraphQL API access, and white-glove support. Quote-based pricing.
+  entries:
+  - label: Pro Subscription
+    name: pro
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Unlimited Logs
+  - name: Unlimited Evaluations
+  - name: Unlimited Datasets
+  - name: Unlimited Team Seats
+  - name: GraphQL API
+  - name: White-Glove Support
+- id: athina-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Everything in Pro plus self-hosted deployment, role-based access controls,
+    and support for custom models. Custom pricing; contact sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Self-Hosted Deployment
+  - name: Role-Based Access Controls
+  - name: Custom Models
+  - name: Custom Volume Pricing
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

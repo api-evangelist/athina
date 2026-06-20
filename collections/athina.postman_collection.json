@@ -1,0 +1,387 @@
+{
+  "info": {
+    "name": "Athina AI API",
+    "description": "Athina AI LLM monitoring, evaluation, and experimentation REST API. Authenticate every request with an athina-api-key header. Inference logging is served from https://log.athina.ai; all other resources from https://api.athina.ai/api/v1.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "athina-api-key" },
+      { "key": "value", "value": "{{athinaApiKey}}" },
+      { "key": "in", "value": "header" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.athina.ai/api/v1" },
+    { "key": "logUrl", "value": "https://log.athina.ai/api/v1" },
+    { "key": "athinaApiKey", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Logging & Inferences",
+      "item": [
+        {
+          "name": "Log an LLM inference",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "athina-api-key", "value": "{{athinaApiKey}}" }
+            ],
+            "url": {
+              "raw": "{{logUrl}}/log/inference",
+              "host": ["{{logUrl}}"],
+              "path": ["log", "inference"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"language_model_id\": \"gpt-4o\",\n  \"prompt\": [{\"role\": \"user\", \"content\": \"What is the capital of France?\"}],\n  \"response\": \"Paris\",\n  \"user_query\": \"What is the capital of France?\",\n  \"context\": \"\",\n  \"session_id\": \"session-123\",\n  \"prompt_tokens\": 12,\n  \"completion_tokens\": 1,\n  \"total_tokens\": 13,\n  \"cost\": 0.0001,\n  \"response_time\": 240,\n  \"environment\": \"production\",\n  \"prompt_slug\": \"capital-lookup\",\n  \"customer_id\": \"cust-1\",\n  \"external_reference_id\": \"ext-1\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Update a log by id",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "athina-api-key", "value": "{{athinaApiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/logs/:log_id",
+              "host": ["{{baseUrl}}"],
+              "path": ["logs", ":log_id"],
+              "variable": [{ "key": "log_id", "value": "" }]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expected_response\": \"Paris\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Update a log by external reference id",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "athina-api-key", "value": "{{athinaApiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/logs/external/:external_reference_id",
+              "host": ["{{baseUrl}}"],
+              "path": ["logs", "external", ":external_reference_id"],
+              "variable": [{ "key": "external_reference_id", "value": "" }]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expected_response\": \"Paris\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tracing",
+      "item": [
+        {
+          "name": "Create a trace",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "athina-api-key", "value": "{{athinaApiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/trace/",
+              "host": ["{{baseUrl}}"],
+              "path": ["trace", ""]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"my-app-run\",\n  \"start_time\": \"2026-06-20T12:00:00Z\",\n  \"status\": \"ok\",\n  \"attributes\": {}\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Get a trace",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "athina-api-key", "value": "{{athinaApiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/trace/:trace_id",
+              "host": ["{{baseUrl}}"],
+              "path": ["trace", ":trace_id"],
+              "variable": [{ "key": "trace_id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Update a trace",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "athina-api-key", "value": "{{athinaApiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/trace/:trace_id",
+              "host": ["{{baseUrl}}"],
+              "path": ["trace", ":trace_id"],
+              "variable": [{ "key": "trace_id", "value": "" }]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"my-app-run\",\n  \"start_time\": \"2026-06-20T12:00:00Z\",\n  \"end_time\": \"2026-06-20T12:00:05Z\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Create a span",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "athina-api-key", "value": "{{athinaApiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/trace/:trace_id/spans",
+              "host": ["{{baseUrl}}"],
+              "path": ["trace", ":trace_id", "spans"],
+              "variable": [{ "key": "trace_id", "value": "" }]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"llm-call\",\n  \"trace_id\": \"{{trace_id}}\",\n  \"span_type\": \"generation\",\n  \"start_time\": \"2026-06-20T12:00:01Z\",\n  \"status\": \"ok\",\n  \"attributes\": {}\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Get a span",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "athina-api-key", "value": "{{athinaApiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/trace/:trace_id/spans/:span_id",
+              "host": ["{{baseUrl}}"],
+              "path": ["trace", ":trace_id", "spans", ":span_id"],
+              "variable": [
+                { "key": "trace_id", "value": "" },
+                { "key": "span_id", "value": "" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update a span",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "athina-api-key", "value": "{{athinaApiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/trace/:trace_id/spans/:span_id",
+              "host": ["{{baseUrl}}"],
+              "path": ["trace", ":trace_id", "spans", ":span_id"],
+              "variable": [
+                { "key": "trace_id", "value": "" },
+                { "key": "span_id", "value": "" }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"llm-call\",\n  \"span_type\": \"generation\",\n  \"start_time\": \"2026-06-20T12:00:01Z\",\n  \"end_time\": \"2026-06-20T12:00:03Z\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Datasets",
+      "item": [
+        {
+          "name": "Create a dataset",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "athina-api-key", "value": "{{athinaApiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/dataset_v2",
+              "host": ["{{baseUrl}}"],
+              "path": ["dataset_v2"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": \"api\",\n  \"name\": \"My Dataset\",\n  \"description\": \"Evaluation dataset\",\n  \"dataset_rows\": [\n    {\n      \"query\": \"What is the capital of France?\",\n      \"context\": \"France is a country in Europe.\",\n      \"response\": \"Paris\",\n      \"expected_response\": \"Paris\"\n    }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Get a dataset",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "athina-api-key", "value": "{{athinaApiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/dataset_v2/:dataset_id",
+              "host": ["{{baseUrl}}"],
+              "path": ["dataset_v2", ":dataset_id"],
+              "variable": [{ "key": "dataset_id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Delete a dataset",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "athina-api-key", "value": "{{athinaApiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/dataset_v2/:dataset_id",
+              "host": ["{{baseUrl}}"],
+              "path": ["dataset_v2", ":dataset_id"],
+              "variable": [{ "key": "dataset_id", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Add rows to a dataset",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "athina-api-key", "value": "{{athinaApiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/dataset_v2/:dataset_id/add-rows",
+              "host": ["{{baseUrl}}"],
+              "path": ["dataset_v2", ":dataset_id", "add-rows"],
+              "variable": [{ "key": "dataset_id", "value": "" }]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset_rows\": [\n    {\n      \"query\": \"What is the capital of Spain?\",\n      \"context\": \"Spain is a country in Europe.\",\n      \"response\": \"Madrid\",\n      \"expected_response\": \"Madrid\"\n    }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Update a cell in a dataset",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "athina-api-key", "value": "{{athinaApiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/dataset_v2/:dataset_id/cell",
+              "host": ["{{baseUrl}}"],
+              "path": ["dataset_v2", ":dataset_id", "cell"],
+              "variable": [{ "key": "dataset_id", "value": "" }]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"row_no\": 0,\n  \"column_name\": \"expected_response\",\n  \"value\": \"Paris\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Evaluations",
+      "item": [
+        {
+          "name": "Run an evaluation",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "athina-api-key", "value": "{{athinaApiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/eval/run",
+              "host": ["{{baseUrl}}"],
+              "path": ["eval", "run"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset_id\": \"\",\n  \"evals\": [\n    { \"name\": \"DoesResponseAnswerQuery\", \"type\": \"llm_grader\" }\n  ],\n  \"model\": \"gpt-4o\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Prompts",
+      "item": [
+        {
+          "name": "Create or version a prompt template",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "athina-api-key", "value": "{{athinaApiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/prompt/:prompt_slug",
+              "host": ["{{baseUrl}}"],
+              "path": ["prompt", ":prompt_slug"],
+              "variable": [{ "key": "prompt_slug", "value": "" }]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": [{\"role\": \"user\", \"content\": \"Summarize: {{text}}\"}],\n  \"model\": \"gpt-4o\",\n  \"parameters\": { \"temperature\": 0.2 },\n  \"commit_message\": \"Initial version\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Get the default prompt version",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "athina-api-key", "value": "{{athinaApiKey}}" }],
+            "url": {
+              "raw": "{{baseUrl}}/prompt/:prompt_slug/default",
+              "host": ["{{baseUrl}}"],
+              "path": ["prompt", ":prompt_slug", "default"],
+              "variable": [{ "key": "prompt_slug", "value": "" }]
+            }
+          }
+        },
+        {
+          "name": "Run a prompt",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "athina-api-key", "value": "{{athinaApiKey}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/prompt/:prompt_slug/run",
+              "host": ["{{baseUrl}}"],
+              "path": ["prompt", ":prompt_slug", "run"],
+              "variable": [{ "key": "prompt_slug", "value": "" }]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"variables\": { \"text\": \"Hello world\" },\n  \"version\": 1,\n  \"model\": \"gpt-4o\",\n  \"parameters\": { \"temperature\": 0.2, \"max_tokens\": 256 }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

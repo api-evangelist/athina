@@ -1,0 +1,63 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Athina AI
+providerId: athina
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- LLM
+- Observability
+- Evaluation
+- Monitoring
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Athina AI does not publish explicit numeric request-per-minute rate limits in
+  its public API reference. The primary usage constraint is the per-plan monthly
+  log allowance (10k logs/month on the free tier; unlimited on Pro and
+  Enterprise). Dataset writes are bounded by a 1000-row-per-dataset cap and an
+  add-rows batch limit. Specific per-endpoint throttling values are not
+  documented and are not reconciled in this artifact.
+notes: >-
+  No documented RPM/TPM values were found; treat plan log allowances and the
+  dataset row cap as the effective limits. Verify any per-endpoint throttling
+  in the Athina platform or with Athina support during reconciliation.
+sources:
+- https://docs.athina.ai/api-reference/datasets/add-rows-to-dataset
+- https://www.athina.ai/pricing
+- https://docs.athina.ai
+responseCodes:
+  throttled: 429
+limits:
+- name: Monthly Logs (Free)
+  scope: account
+  metric: logs
+  limit: 10000
+  notes: Free tier monthly log allowance; unlimited on Pro and Enterprise.
+- name: Dataset Rows
+  scope: dataset
+  metric: rows
+  limit: 1000
+  notes: Maximum number of rows per dataset.
+- name: Add Rows Batch
+  scope: request
+  metric: rows
+  limit: 1000
+  notes: Rows submitted per add-rows request; values must be type-consistent.
+- name: Per-Endpoint Request Rate
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: No public RPM/TPM values documented; verify with Athina support.
+policies:
+- name: Plan-Based Allowances
+  description: Usage is primarily governed by per-plan monthly log allowances rather than per-minute request caps.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

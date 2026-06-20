@@ -1,0 +1,86 @@
+aid: athina
+name: Athina AI
+review:
+  question: Does Athina AI expose a documented public WebSocket or streaming (SSE) API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    Per API Evangelist scope (2026-05-29), HTTP Server-Sent Events (SSE) is
+    in-scope for AsyncAPI modeling. Athina AI's documented REST API exposes no
+    SSE or WebSocket surface: inference logging, tracing, datasets, evals, and
+    prompts are all request/response HTTPS REST. No AsyncAPI document was
+    created because no streaming or event-driven transport is documented.
+findings:
+  summary: |
+    Athina AI publishes a REST API across two hosts: the core API at
+    https://api.athina.ai/api/v1 (datasets, traces/spans, prompts, evals) and a
+    dedicated logging host at https://log.athina.ai for inference logging. All
+    documented endpoints are synchronous HTTPS REST authenticated with an
+    athina-api-key header. No realtime, bidirectional, or streaming WebSocket
+    (ws:// or wss://) endpoint and no Server-Sent Events stream is documented.
+    Much of the evaluation surface (run-eval, run-eval-suite) is driven through
+    the Python/TypeScript SDKs rather than a documented REST endpoint; the
+    REST eval run is represented in the OpenAPI as a best-effort mapping.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.athina.ai/api/v1
+      documented: true
+    - protocol: REST
+      scheme: https
+      baseURL: https://log.athina.ai/api/v1
+      note: Dedicated host for POST /log/inference (inference / prompt-run logging).
+      documented: true
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events stream is documented for any Athina endpoint.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Athina's API reference as of the review date.
+  endpointsConfirmedRest:
+    - POST https://log.athina.ai/api/v1/log/inference
+    - PUT  https://api.athina.ai/api/v1/logs/{log_id}
+    - PUT  https://api.athina.ai/api/v1/logs/external/{external_reference_id}
+    - POST https://api.athina.ai/api/v1/trace/
+    - GET  https://api.athina.ai/api/v1/trace/{trace_id}
+    - PUT  https://api.athina.ai/api/v1/trace/{trace_id}
+    - POST https://api.athina.ai/api/v1/trace/{trace_id}/spans
+    - GET  https://api.athina.ai/api/v1/trace/{trace_id}/spans/{span_id}
+    - PUT  https://api.athina.ai/api/v1/trace/{trace_id}/spans/{span_id}
+    - POST https://api.athina.ai/api/v1/dataset_v2
+    - GET  https://api.athina.ai/api/v1/dataset_v2/{dataset_id}
+    - DELETE https://api.athina.ai/api/v1/dataset_v2/{dataset_id}
+    - POST https://api.athina.ai/api/v1/dataset_v2/{dataset_id}/add-rows
+    - POST https://api.athina.ai/api/v1/dataset_v2/{dataset_id}/cell
+    - POST https://api.athina.ai/api/v1/eval/run
+    - PUT  https://api.athina.ai/api/v1/prompt/{prompt_slug}
+    - GET  https://api.athina.ai/api/v1/prompt/{prompt_slug}/default
+    - POST https://api.athina.ai/api/v1/prompt/{prompt_slug}/run
+sources:
+  - url: https://docs.athina.ai/api-reference/logging/log-via-api-request
+    type: Documentation
+    note: Inference logging via POST to https://log.athina.ai (athina-api-key header); request/response REST.
+  - url: https://docs.athina.ai/api-reference/logging/tracing-via-api
+    type: APIReference
+    note: Trace and span create/get/update endpoints under /api/v1/trace; all REST.
+  - url: https://docs.athina.ai/api-reference/datasets/create-dataset
+    type: APIReference
+    note: Dataset create/list/get/add-rows/update-cell/delete under /api/v1/dataset_v2; all REST.
+  - url: https://docs.athina.ai/prompts/run-prompt
+    type: Documentation
+    note: Prompt create/version/get-default/run under /api/v1/prompt/{slug}; all REST, no streaming.
+  - url: https://docs.athina.ai/api-reference/evals/running-evals/run-single-eval
+    type: Documentation
+    note: Eval running is documented primarily through the Python/TypeScript SDKs.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or SSE protocol surface exists in Athina's documented API. No
+    AsyncAPI document was authored. The apis.yml catalogs the five REST sub-APIs
+    (Logging & Inferences, Datasets, Evaluations, Prompts, Experiments) with an
+    OpenAPI 3.0.1 specification covering the documented REST endpoints.

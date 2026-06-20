@@ -1,0 +1,104 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Athina AI
+providerId: athina
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- LLM
+- Observability
+- Evaluation
+- Monitoring
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Athina AI spend. Athina is a sales-led SaaS observability and
+  evaluation platform: a free tier with a 10k-log monthly allowance, a
+  quote-based Pro subscription with unlimited logs/evals/datasets/seats, and a
+  custom Enterprise tier with self-hosted deployment. The primary cost driver
+  is logged-inference volume; evaluation runs additionally consume third-party
+  LLM grader tokens (e.g. OpenAI) billed outside Athina. Per-seat and per-log
+  contract rates are not public, so spend is not reconciled here.
+notes: >-
+  Pro and Enterprise pricing is contact-sales; only the free tier log allowance
+  is public. Evaluation grading typically incurs separate LLM provider token
+  costs. Verify contract metering and seat counts during reconciliation.
+sources:
+- https://www.athina.ai/pricing
+- https://docs.athina.ai
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Athina AI
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: Athina AI Platform
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Athina AI
+  PublisherName: Athina AI
+  InvoiceIssuerName: Athina AI
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Subscription
+meters:
+- name: logs
+  description: Logged LLM inferences / prompt runs; metered against the plan monthly allowance.
+  unit: logs
+  aggregation: sum
+  dimensions:
+  - account
+  - environment
+  - prompt_slug
+- name: evaluations
+  description: Evaluation runs executed against datasets and logged inferences.
+  unit: eval_runs
+  aggregation: sum
+  dimensions:
+  - account
+  - dataset
+- name: grader_tokens
+  description: Third-party LLM tokens consumed by eval graders (e.g. OpenAI), billed by the model provider, not Athina.
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - account
+  - model
+- name: datasets
+  description: Datasets created and stored, each capped at 1000 rows.
+  unit: datasets
+  aggregation: sum
+  dimensions:
+  - account
+- name: seats
+  description: Team seats on the account; unlimited on Pro and Enterprise.
+  unit: seats
+  aggregation: max
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Track monthly log volume against the plan allowance in the Athina platform; tag logs with environment, prompt_slug, and customer_id.
+- name: Allocation
+  description: Segment logs by customer_id / customer_user_id and environment to map observability spend to teams and workloads.
+- name: Optimization
+  description: Sample or filter low-value logs to stay within allowances; batch evaluations and choose cheaper grader models to reduce third-party token spend.
+- name: Accountability
+  description: Assign owners per project and review log volume and grader-token spend before upgrading tiers.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,201 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Athina AI API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "athina-api-key",
+        "value": "{{athinaApiKey}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Logging & Inferences", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Log an LLM inference", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://log.athina.ai/api/v1/log/inference",
+            "body": { "type": "json", "data": "{\"language_model_id\":\"gpt-4o\",\"prompt\":[{\"role\":\"user\",\"content\":\"What is the capital of France?\"}],\"response\":\"Paris\"}" }
+          },
+          "docs": "Log a single LLM inference / prompt run to Athina."
+        },
+        {
+          "info": { "name": "Update a log by id", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.athina.ai/api/v1/logs/{log_id}",
+            "body": { "type": "json", "data": "{\"expected_response\":\"Paris\"}" }
+          },
+          "docs": "Update a logged inference by its Athina log id."
+        },
+        {
+          "info": { "name": "Update a log by external reference id", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.athina.ai/api/v1/logs/external/{external_reference_id}",
+            "body": { "type": "json", "data": "{\"expected_response\":\"Paris\"}" }
+          },
+          "docs": "Update a logged inference by external_reference_id."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Tracing", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create a trace", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.athina.ai/api/v1/trace/",
+            "body": { "type": "json", "data": "{\"name\":\"my-app-run\",\"start_time\":\"2026-06-20T12:00:00Z\",\"status\":\"ok\",\"attributes\":{}}" }
+          },
+          "docs": "Create a new trace for an application run."
+        },
+        {
+          "info": { "name": "Get a trace", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.athina.ai/api/v1/trace/{trace_id}"
+          },
+          "docs": "Retrieve a trace and its spans by id."
+        },
+        {
+          "info": { "name": "Update a trace", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.athina.ai/api/v1/trace/{trace_id}",
+            "body": { "type": "json", "data": "{\"name\":\"my-app-run\",\"start_time\":\"2026-06-20T12:00:00Z\",\"end_time\":\"2026-06-20T12:00:05Z\"}" }
+          },
+          "docs": "Update a trace name and timing."
+        },
+        {
+          "info": { "name": "Create a span", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.athina.ai/api/v1/trace/{trace_id}/spans",
+            "body": { "type": "json", "data": "{\"name\":\"llm-call\",\"trace_id\":\"{trace_id}\",\"span_type\":\"generation\",\"start_time\":\"2026-06-20T12:00:01Z\",\"status\":\"ok\",\"attributes\":{}}" }
+          },
+          "docs": "Create a span within a trace (use span_type generation for LLM calls)."
+        },
+        {
+          "info": { "name": "Get a span", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.athina.ai/api/v1/trace/{trace_id}/spans/{span_id}"
+          },
+          "docs": "Retrieve a single span within a trace."
+        },
+        {
+          "info": { "name": "Update a span", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.athina.ai/api/v1/trace/{trace_id}/spans/{span_id}",
+            "body": { "type": "json", "data": "{\"name\":\"llm-call\",\"span_type\":\"generation\",\"start_time\":\"2026-06-20T12:00:01Z\",\"end_time\":\"2026-06-20T12:00:03Z\"}" }
+          },
+          "docs": "Update a span name, type, and timing."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Datasets", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create a dataset", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.athina.ai/api/v1/dataset_v2",
+            "body": { "type": "json", "data": "{\"source\":\"api\",\"name\":\"My Dataset\"}" }
+          },
+          "docs": "Create a new dataset, optionally seeding prompt template and rows."
+        },
+        {
+          "info": { "name": "Get a dataset", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.athina.ai/api/v1/dataset_v2/{dataset_id}"
+          },
+          "docs": "Retrieve a dataset and its rows by id."
+        },
+        {
+          "info": { "name": "Delete a dataset", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.athina.ai/api/v1/dataset_v2/{dataset_id}"
+          },
+          "docs": "Delete a dataset by id."
+        },
+        {
+          "info": { "name": "Add rows to a dataset", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.athina.ai/api/v1/dataset_v2/{dataset_id}/add-rows",
+            "body": { "type": "json", "data": "{\"dataset_rows\":[{\"query\":\"What is the capital of Spain?\",\"response\":\"Madrid\",\"expected_response\":\"Madrid\"}]}" }
+          },
+          "docs": "Append up to 1000 rows to an existing dataset."
+        },
+        {
+          "info": { "name": "Update a cell in a dataset", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.athina.ai/api/v1/dataset_v2/{dataset_id}/cell",
+            "body": { "type": "json", "data": "{\"row_no\":0,\"column_name\":\"expected_response\",\"value\":\"Paris\"}" }
+          },
+          "docs": "Update the value of a single dataset cell."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Evaluations", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Run an evaluation", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.athina.ai/api/v1/eval/run",
+            "body": { "type": "json", "data": "{\"dataset_id\":\"\",\"evals\":[{\"name\":\"DoesResponseAnswerQuery\",\"type\":\"llm_grader\"}],\"model\":\"gpt-4o\"}" }
+          },
+          "docs": "Run one or more preset or custom evals against a dataset or rows."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Prompts", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create or version a prompt template", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.athina.ai/api/v1/prompt/{prompt_slug}",
+            "body": { "type": "json", "data": "{\"prompt\":[{\"role\":\"user\",\"content\":\"Summarize: {{text}}\"}],\"model\":\"gpt-4o\",\"parameters\":{\"temperature\":0.2},\"commit_message\":\"Initial version\"}" }
+          },
+          "docs": "Create a prompt template or a new incremented version at the given slug."
+        },
+        {
+          "info": { "name": "Get the default prompt version", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.athina.ai/api/v1/prompt/{prompt_slug}/default"
+          },
+          "docs": "Fetch the default version of a prompt template by slug."
+        },
+        {
+          "info": { "name": "Run a prompt", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.athina.ai/api/v1/prompt/{prompt_slug}/run",
+            "body": { "type": "json", "data": "{\"variables\":{\"text\":\"Hello world\"},\"model\":\"gpt-4o\",\"parameters\":{\"temperature\":0.2,\"max_tokens\":256}}" }
+          },
+          "docs": "Execute a managed prompt template by slug with input variables."
+        }
+      ]
+    }
+  ]
+}

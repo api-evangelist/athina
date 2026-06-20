@@ -1,0 +1,155 @@
+aid: athina
+url: https://raw.githubusercontent.com/api-evangelist/athina/refs/heads/main/apis.yml
+name: Athina AI
+kind: company
+description: Athina AI is an LLM monitoring, evaluation, and experimentation platform
+  for building production-grade AI applications. Its REST API lets teams log inferences
+  and traces, manage datasets, run 50+ preset and custom evaluations, version and
+  run prompt templates, and collaborate on experiments across the full LLM
+  development lifecycle.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- AI
+- LLM
+- Observability
+- Evaluation
+- Monitoring
+created: '2026-06-20'
+modified: '2026-06-20'
+specificationVersion: '0.19'
+apis:
+- aid: athina:athina-logging-inferences-api
+  name: Athina Logging & Inferences API
+  tags:
+  - Logging
+  - Inferences
+  - Tracing
+  - Observability
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.athina.ai/api-reference/logging/log-via-api-request
+  baseURL: https://api.athina.ai/api/v1
+  properties:
+  - url: https://docs.athina.ai/api-reference/logging/log-via-api-request
+    type: Documentation
+  - url: https://docs.athina.ai/api-reference/logging/tracing-via-api
+    type: APIReference
+  - url: openapi/athina-openapi.yml
+    type: OpenAPI
+  - url: collections/athina.postman_collection.json
+    type: PostmanCollection
+  - url: collections/athina.opencollection.json
+    type: OpenCollection
+  description: Log LLM inferences and prompt runs (prompt, response, model, tokens,
+    cost, context, customer/session metadata), update logs by id or external
+    reference, and build nested traces with spans for end-to-end observability.
+- aid: athina:athina-datasets-api
+  name: Athina Datasets API
+  tags:
+  - Datasets
+  - Data Management
+  - Evaluation Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.athina.ai/api-reference/datasets/create-dataset
+  baseURL: https://api.athina.ai/api/v1
+  properties:
+  - url: https://docs.athina.ai/api-reference/datasets/create-dataset
+    type: Documentation
+  - url: https://docs.athina.ai/api-reference/datasets/add-rows-to-dataset
+    type: APIReference
+  - url: openapi/athina-openapi.yml
+    type: OpenAPI
+  - url: collections/athina.postman_collection.json
+    type: PostmanCollection
+  - url: collections/athina.opencollection.json
+    type: OpenCollection
+  description: Create datasets, list and retrieve datasets, add up to 1000 rows
+    (query, context, response, expected_response and custom fields), update
+    individual cells, and delete datasets used as inputs for evaluations and
+    experiments.
+- aid: athina:athina-evaluations-api
+  name: Athina Evaluations API
+  tags:
+  - Evaluation
+  - Evals
+  - Quality
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.athina.ai/api-reference/evals/preset-evals/overview
+  baseURL: https://api.athina.ai/api/v1
+  properties:
+  - url: https://docs.athina.ai/api-reference/evals/preset-evals/overview
+    type: Documentation
+  - url: https://docs.athina.ai/api-reference/evals/running-evals/run-single-eval
+    type: APIReference
+  - url: openapi/athina-openapi.yml
+    type: OpenAPI
+  - url: collections/athina.postman_collection.json
+    type: PostmanCollection
+  - url: collections/athina.opencollection.json
+    type: OpenCollection
+  description: Run single evaluations or suites of 50+ preset and custom evals
+    (RAG, summarization, function-calling, safety) against datasets and logged
+    inferences, with results surfaced in the Athina platform.
+- aid: athina:athina-prompts-api
+  name: Athina Prompts API
+  tags:
+  - Prompts
+  - Prompt Management
+  - Versioning
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.athina.ai/prompts/overview
+  baseURL: https://api.athina.ai/api/v1
+  properties:
+  - url: https://docs.athina.ai/prompts/overview
+    type: Documentation
+  - url: https://docs.athina.ai/prompts/run-prompt
+    type: APIReference
+  - url: openapi/athina-openapi.yml
+    type: OpenAPI
+  - url: collections/athina.postman_collection.json
+    type: PostmanCollection
+  - url: collections/athina.opencollection.json
+    type: OpenCollection
+  description: Create and version prompt templates by slug, fetch the default
+    version, and run a prompt by slug with input variables, model, and parameters
+    (temperature, max_tokens, top_p, penalties) for managed prompt execution.
+- aid: athina:athina-experiments-api
+  name: Athina Experiments API
+  tags:
+  - Experiments
+  - Comparison
+  - Prompt Engineering
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.athina.ai/prompts/overview
+  baseURL: https://api.athina.ai/api/v1
+  properties:
+  - url: https://docs.athina.ai/prompts/overview
+    type: Documentation
+  - url: https://docs.athina.ai/prompts/run-prompt
+    type: APIReference
+  - url: openapi/athina-openapi.yml
+    type: OpenAPI
+  - url: collections/athina.postman_collection.json
+    type: PostmanCollection
+  - url: collections/athina.opencollection.json
+    type: OpenCollection
+  description: Compare prompts, models, and parameters across datasets by combining
+    versioned prompt runs with evaluations, enabling side-by-side experimentation
+    over the prompt and dataset APIs.
+common:
+- type: GitHubOrganization
+  url: https://github.com/athina-ai
+- type: LinkedIn
+  url: https://www.linkedin.com/company/athina-ai
+- type: Website
+  url: https://www.athina.ai
+- type: Documentation
+  url: https://docs.athina.ai
+- type: Plans
+  url: plans/athina-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/athina-rate-limits.yml
+- type: FinOps
+  url: finops/athina-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
