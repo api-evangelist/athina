@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/athina-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: athinaApiKey
+  type: apiKey
+  in: header
+  parameter: athina-api-key
+  description: Athina API key created in the Athina platform settings.
+  sources:
+  - openapi/athina-openapi.yml

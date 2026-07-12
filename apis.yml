@@ -136,6 +136,10 @@ apis:
     versioned prompt runs with evaluations, enabling side-by-side experimentation
     over the prompt and dataset APIs.
 common:
+- type: DomainSecurity
+  url: security/athina-domain-security.yml
+- type: Authentication
+  url: authentication/athina-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/athina-ai
 - type: LinkedIn
@@ -150,6 +154,8 @@ common:
   url: rate-limits/athina-rate-limits.yml
 - type: FinOps
   url: finops/athina-finops.yml
+- url: https://blog.athina.ai/rss.xml
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
