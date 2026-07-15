@@ -136,6 +136,8 @@ apis:
     versioned prompt runs with evaluations, enabling side-by-side experimentation
     over the prompt and dataset APIs.
 common:
+- type: AgenticAccess
+  url: agentic-access/athina-agentic-access.yml
 - type: DomainSecurity
   url: security/athina-domain-security.yml
 - type: Authentication
