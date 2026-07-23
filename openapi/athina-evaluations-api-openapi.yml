@@ -1,0 +1,135 @@
+openapi: 3.0.1
+info:
+  title: Athina AI Datasets Evaluations API
+  description: REST API for the Athina AI LLM monitoring, evaluation, and experimentation platform. Log inferences and prompt runs, build traces and spans, manage datasets, run evaluations, and create, version, and run prompt templates. All requests authenticate with an `athina-api-key` header. Inference and prompt-run logging is served from the `https://log.athina.ai` host; all other resources are served from `https://api.athina.ai/api/v1`.
+  termsOfService: https://www.athina.ai/terms
+  contact:
+    name: Athina AI Support
+    url: https://www.athina.ai
+    email: hello@athina.ai
+  version: '1.0'
+servers:
+- url: https://api.athina.ai/api/v1
+  description: Core API (datasets, traces, prompts, evals)
+- url: https://log.athina.ai/api/v1
+  description: Inference logging host
+security:
+- athinaApiKey: []
+tags:
+- name: Evaluations
+  description: Run evaluations against datasets and logged inferences.
+paths:
+  /eval/run:
+    post:
+      operationId: runEval
+      tags:
+      - Evaluations
+      summary: Run an evaluation
+      description: Run one or more preset or custom evaluations against a dataset or set of inference rows. Evaluations grade attributes such as faithfulness, context relevance, answer relevance, and summarization quality.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunEvalRequest'
+      responses:
+        '200':
+          description: Evaluation run accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunEvalResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    RunEvalRequest:
+      type: object
+      required:
+      - evals
+      properties:
+        dataset_id:
+          type: string
+          description: Dataset to evaluate; alternatively provide rows inline.
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/DatasetRow'
+        evals:
+          type: array
+          description: List of eval definitions to run.
+          items:
+            $ref: '#/components/schemas/EvalDefinition'
+        model:
+          type: string
+          description: Grader / evaluator model.
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    RunEvalResponse:
+      type: object
+      properties:
+        eval_request_id:
+          type: string
+        status:
+          type: string
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              eval_name:
+                type: string
+              passed:
+                type: boolean
+              score:
+                type: number
+              reason:
+                type: string
+    DatasetRow:
+      type: object
+      properties:
+        query:
+          type: string
+        context:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        response:
+          type: string
+        expected_response:
+          type: string
+      additionalProperties: true
+    EvalDefinition:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          example: DoesResponseAnswerQuery
+        type:
+          type: string
+          example: llm_grader
+        config:
+          type: object
+          additionalProperties: true
+  responses:
+    Unauthorized:
+      description: Missing or invalid athina-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    athinaApiKey:
+      type: apiKey
+      in: header
+      name: athina-api-key
+      description: Athina API key created in the Athina platform settings.

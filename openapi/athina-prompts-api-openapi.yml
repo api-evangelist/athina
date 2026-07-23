@@ -1,0 +1,213 @@
+openapi: 3.0.1
+info:
+  title: Athina AI Datasets Prompts API
+  description: REST API for the Athina AI LLM monitoring, evaluation, and experimentation platform. Log inferences and prompt runs, build traces and spans, manage datasets, run evaluations, and create, version, and run prompt templates. All requests authenticate with an `athina-api-key` header. Inference and prompt-run logging is served from the `https://log.athina.ai` host; all other resources are served from `https://api.athina.ai/api/v1`.
+  termsOfService: https://www.athina.ai/terms
+  contact:
+    name: Athina AI Support
+    url: https://www.athina.ai
+    email: hello@athina.ai
+  version: '1.0'
+servers:
+- url: https://api.athina.ai/api/v1
+  description: Core API (datasets, traces, prompts, evals)
+- url: https://log.athina.ai/api/v1
+  description: Inference logging host
+security:
+- athinaApiKey: []
+tags:
+- name: Prompts
+  description: Create, version, fetch, and run prompt templates.
+paths:
+  /prompt/{prompt_slug}:
+    put:
+      operationId: createPromptTemplate
+      tags:
+      - Prompts
+      summary: Create or version a prompt template
+      description: Create a prompt template at the given slug, or create a new incremented version if the slug already exists. Supports template variables of the form {{variable_name}} within message content.
+      parameters:
+      - $ref: '#/components/parameters/PromptSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePromptRequest'
+      responses:
+        '200':
+          description: Prompt template created or versioned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromptTemplate'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /prompt/{prompt_slug}/default:
+    get:
+      operationId: getDefaultPrompt
+      tags:
+      - Prompts
+      summary: Get the default prompt version
+      description: Fetch the default version of a prompt template by slug.
+      parameters:
+      - $ref: '#/components/parameters/PromptSlug'
+      responses:
+        '200':
+          description: Prompt template retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromptTemplate'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /prompt/{prompt_slug}/run:
+    post:
+      operationId: runPrompt
+      tags:
+      - Prompts
+      summary: Run a prompt
+      description: Execute a managed prompt template by slug with input variables. Optional overrides for version, model, and model parameters. Results are recorded on the Athina Observe page.
+      parameters:
+      - $ref: '#/components/parameters/PromptSlug'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunPromptRequest'
+      responses:
+        '200':
+          description: Prompt executed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunPromptResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    CreatePromptRequest:
+      type: object
+      required:
+      - prompt
+      - model
+      properties:
+        prompt:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        model:
+          type: string
+          example: gpt-4o
+        parameters:
+          $ref: '#/components/schemas/ModelParameters'
+        commit_message:
+          type: string
+    RunPromptResponse:
+      type: object
+      properties:
+        prompt_run_id:
+          type: string
+        response:
+          type: string
+        model:
+          type: string
+        usage:
+          type: object
+          properties:
+            prompt_tokens:
+              type: number
+            completion_tokens:
+              type: number
+            total_tokens:
+              type: number
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    RunPromptRequest:
+      type: object
+      required:
+      - variables
+      properties:
+        variables:
+          type: object
+          additionalProperties: true
+          description: Input values substituted into the prompt template.
+        version:
+          type: integer
+          description: Optional prompt version; defaults to the default version.
+        model:
+          type: string
+          description: Optional model override.
+        parameters:
+          $ref: '#/components/schemas/ModelParameters'
+    ModelParameters:
+      type: object
+      properties:
+        temperature:
+          type: number
+        max_tokens:
+          type: integer
+        top_p:
+          type: number
+        presence_penalty:
+          type: number
+        frequency_penalty:
+          type: number
+    PromptTemplate:
+      type: object
+      properties:
+        slug:
+          type: string
+        version:
+          type: integer
+        prompt:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        model:
+          type: string
+        parameters:
+          $ref: '#/components/schemas/ModelParameters'
+    Message:
+      type: object
+      properties:
+        role:
+          type: string
+          example: user
+        content:
+          type: string
+          example: What is the capital of France?
+  parameters:
+    PromptSlug:
+      name: prompt_slug
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid athina-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    athinaApiKey:
+      type: apiKey
+      in: header
+      name: athina-api-key
+      description: Athina API key created in the Athina platform settings.

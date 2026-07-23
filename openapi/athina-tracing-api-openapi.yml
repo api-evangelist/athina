@@ -1,0 +1,303 @@
+openapi: 3.0.1
+info:
+  title: Athina AI Datasets Tracing API
+  description: REST API for the Athina AI LLM monitoring, evaluation, and experimentation platform. Log inferences and prompt runs, build traces and spans, manage datasets, run evaluations, and create, version, and run prompt templates. All requests authenticate with an `athina-api-key` header. Inference and prompt-run logging is served from the `https://log.athina.ai` host; all other resources are served from `https://api.athina.ai/api/v1`.
+  termsOfService: https://www.athina.ai/terms
+  contact:
+    name: Athina AI Support
+    url: https://www.athina.ai
+    email: hello@athina.ai
+  version: '1.0'
+servers:
+- url: https://api.athina.ai/api/v1
+  description: Core API (datasets, traces, prompts, evals)
+- url: https://log.athina.ai/api/v1
+  description: Inference logging host
+security:
+- athinaApiKey: []
+tags:
+- name: Tracing
+  description: Create and manage traces and spans.
+paths:
+  /trace/:
+    post:
+      operationId: createTrace
+      tags:
+      - Tracing
+      summary: Create a trace
+      description: Create a new trace for an application run. A trace must contain at least one span with span_type "generation" to be visible in the Athina UI.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTraceRequest'
+      responses:
+        '200':
+          description: Trace created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trace'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /trace/{trace_id}:
+    get:
+      operationId: getTrace
+      tags:
+      - Tracing
+      summary: Get a trace
+      description: Retrieve a trace by its id, including all associated spans.
+      parameters:
+      - $ref: '#/components/parameters/TraceId'
+      responses:
+        '200':
+          description: Trace retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trace'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateTrace
+      tags:
+      - Tracing
+      summary: Update a trace
+      description: Update a trace's name and timing.
+      parameters:
+      - $ref: '#/components/parameters/TraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTraceRequest'
+      responses:
+        '200':
+          description: Trace updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trace'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /trace/{trace_id}/spans:
+    post:
+      operationId: createSpan
+      tags:
+      - Tracing
+      summary: Create a span
+      description: Create a span within a trace. Use span_type "generation" for LLM calls, which makes the parent trace visible in the Athina UI.
+      parameters:
+      - $ref: '#/components/parameters/TraceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSpanRequest'
+      responses:
+        '200':
+          description: Span created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Span'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /trace/{trace_id}/spans/{span_id}:
+    get:
+      operationId: getSpan
+      tags:
+      - Tracing
+      summary: Get a span
+      description: Retrieve a single span within a trace.
+      parameters:
+      - $ref: '#/components/parameters/TraceId'
+      - $ref: '#/components/parameters/SpanId'
+      responses:
+        '200':
+          description: Span retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Span'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateSpan
+      tags:
+      - Tracing
+      summary: Update a span
+      description: Update a span's name, type, and timing.
+      parameters:
+      - $ref: '#/components/parameters/TraceId'
+      - $ref: '#/components/parameters/SpanId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSpanRequest'
+      responses:
+        '200':
+          description: Span updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Span'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    SpanId:
+      name: span_id
+      in: path
+      required: true
+      schema:
+        type: string
+    TraceId:
+      name: trace_id
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    UpdateSpanRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        span_type:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+    Trace:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        status:
+          type: string
+        attributes:
+          type: object
+          additionalProperties: true
+        spans:
+          type: array
+          items:
+            $ref: '#/components/schemas/Span'
+    CreateSpanRequest:
+      type: object
+      required:
+      - name
+      - trace_id
+      - span_type
+      - start_time
+      properties:
+        name:
+          type: string
+        trace_id:
+          type: string
+        span_type:
+          type: string
+          example: generation
+        start_time:
+          type: string
+          format: date-time
+        status:
+          type: string
+        attributes:
+          type: object
+          additionalProperties: true
+    CreateTraceRequest:
+      type: object
+      required:
+      - name
+      - start_time
+      properties:
+        name:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+        status:
+          type: string
+        attributes:
+          type: object
+          additionalProperties: true
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    UpdateTraceRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+    Span:
+      type: object
+      properties:
+        id:
+          type: string
+        trace_id:
+          type: string
+        name:
+          type: string
+        span_type:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        status:
+          type: string
+        attributes:
+          type: object
+          additionalProperties: true
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid athina-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    athinaApiKey:
+      type: apiKey
+      in: header
+      name: athina-api-key
+      description: Athina API key created in the Athina platform settings.

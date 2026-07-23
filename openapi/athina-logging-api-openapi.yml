@@ -1,0 +1,230 @@
+openapi: 3.0.1
+info:
+  title: Athina AI Datasets Logging API
+  description: REST API for the Athina AI LLM monitoring, evaluation, and experimentation platform. Log inferences and prompt runs, build traces and spans, manage datasets, run evaluations, and create, version, and run prompt templates. All requests authenticate with an `athina-api-key` header. Inference and prompt-run logging is served from the `https://log.athina.ai` host; all other resources are served from `https://api.athina.ai/api/v1`.
+  termsOfService: https://www.athina.ai/terms
+  contact:
+    name: Athina AI Support
+    url: https://www.athina.ai
+    email: hello@athina.ai
+  version: '1.0'
+servers:
+- url: https://api.athina.ai/api/v1
+  description: Core API (datasets, traces, prompts, evals)
+- url: https://log.athina.ai/api/v1
+  description: Inference logging host
+security:
+- athinaApiKey: []
+tags:
+- name: Logging
+  description: Log LLM inferences and prompt runs.
+paths:
+  /log/inference:
+    servers:
+    - url: https://log.athina.ai/api/v1
+    post:
+      operationId: logInference
+      tags:
+      - Logging
+      summary: Log an LLM inference
+      description: Logs a single LLM inference (prompt run) to Athina for monitoring and evaluation. The prompt may be a plain string or an OpenAI-style messages array. Optional fields capture token usage, cost, latency, retrieved context, and customer/session metadata for segmentation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogInferenceRequest'
+      responses:
+        '200':
+          description: Inference logged successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogInferenceResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /logs/{log_id}:
+    put:
+      operationId: updateLogById
+      tags:
+      - Logging
+      summary: Update a log by id
+      description: Update fields on a previously logged inference by its Athina log id.
+      parameters:
+      - $ref: '#/components/parameters/LogId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLogRequest'
+      responses:
+        '200':
+          description: Log updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /logs/external/{external_reference_id}:
+    put:
+      operationId: updateLogByExternalReferenceId
+      tags:
+      - Logging
+      summary: Update a log by external reference id
+      description: Update a previously logged inference using the caller-supplied external_reference_id, useful when the Athina log id is not retained.
+      parameters:
+      - name: external_reference_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLogRequest'
+      responses:
+        '200':
+          description: Log updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    UpdateLogRequest:
+      type: object
+      description: Fields to update on an existing log.
+      properties:
+        expected_response:
+          type: string
+        context:
+          oneOf:
+          - type: string
+          - type: object
+        metadata:
+          type: object
+    LogInferenceRequest:
+      type: object
+      required:
+      - language_model_id
+      - prompt
+      - response
+      properties:
+        language_model_id:
+          type: string
+          description: Identifier of the model used (e.g. gpt-4o).
+          example: gpt-4o
+        prompt:
+          description: The prompt sent for inference, as a string or an OpenAI-style messages array.
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              $ref: '#/components/schemas/Message'
+        response:
+          type: string
+          description: The model response text.
+        user_query:
+          type: string
+          description: The user message, useful for evaluations.
+        context:
+          description: Retrieved documents / context as a string or object.
+          oneOf:
+          - type: string
+          - type: object
+        expected_response:
+          type: string
+          description: Ground-truth response for evaluation.
+        session_id:
+          type: string
+          description: Groups related inferences into a session.
+        prompt_tokens:
+          type: number
+        completion_tokens:
+          type: number
+        total_tokens:
+          type: number
+        cost:
+          type: number
+        response_time:
+          type: number
+          description: Latency in milliseconds.
+        environment:
+          type: string
+          example: production
+        prompt_slug:
+          type: string
+        customer_id:
+          type: string
+        customer_user_id:
+          type: string
+        external_reference_id:
+          type: string
+          description: Caller-supplied id for later log updates.
+        functions:
+          type: object
+        function_call_response:
+          type: string
+        tools:
+          type: object
+        tool_calls:
+          type: object
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    LogInferenceResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        prompt_run_id:
+          type: string
+    SuccessMessage:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: Dataset rows added successfully
+    Message:
+      type: object
+      properties:
+        role:
+          type: string
+          example: user
+        content:
+          type: string
+          example: What is the capital of France?
+  responses:
+    Unauthorized:
+      description: Missing or invalid athina-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    LogId:
+      name: log_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    athinaApiKey:
+      type: apiKey
+      in: header
+      name: athina-api-key
+      description: Athina API key created in the Athina platform settings.

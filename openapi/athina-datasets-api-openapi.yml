@@ -1,0 +1,270 @@
+openapi: 3.0.1
+info:
+  title: Athina AI Datasets API
+  description: REST API for the Athina AI LLM monitoring, evaluation, and experimentation platform. Log inferences and prompt runs, build traces and spans, manage datasets, run evaluations, and create, version, and run prompt templates. All requests authenticate with an `athina-api-key` header. Inference and prompt-run logging is served from the `https://log.athina.ai` host; all other resources are served from `https://api.athina.ai/api/v1`.
+  termsOfService: https://www.athina.ai/terms
+  contact:
+    name: Athina AI Support
+    url: https://www.athina.ai
+    email: hello@athina.ai
+  version: '1.0'
+servers:
+- url: https://api.athina.ai/api/v1
+  description: Core API (datasets, traces, prompts, evals)
+- url: https://log.athina.ai/api/v1
+  description: Inference logging host
+security:
+- athinaApiKey: []
+tags:
+- name: Datasets
+  description: Create and manage datasets used for evals and experiments.
+paths:
+  /dataset_v2:
+    post:
+      operationId: createDataset
+      tags:
+      - Datasets
+      summary: Create a dataset
+      description: Create a new dataset, optionally seeding it with prompt template and rows. A dataset holds up to 1000 rows and is used as input for evaluations and experiments.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDatasetRequest'
+      responses:
+        '200':
+          description: Dataset created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /dataset_v2/{dataset_id}:
+    get:
+      operationId: getDataset
+      tags:
+      - Datasets
+      summary: Get a dataset
+      description: Retrieve a dataset by id, including its rows.
+      parameters:
+      - $ref: '#/components/parameters/DatasetId'
+      responses:
+        '200':
+          description: Dataset retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteDataset
+      tags:
+      - Datasets
+      summary: Delete a dataset
+      description: Delete a dataset by id.
+      parameters:
+      - $ref: '#/components/parameters/DatasetId'
+      responses:
+        '200':
+          description: Dataset deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /dataset_v2/{dataset_id}/add-rows:
+    post:
+      operationId: addDatasetRows
+      tags:
+      - Datasets
+      summary: Add rows to a dataset
+      description: Append rows to an existing dataset. Each row may include query, context, response, expected_response, and arbitrary custom key-value pairs. Field value types must be consistent across rows; maximum 1000 rows per dataset.
+      parameters:
+      - $ref: '#/components/parameters/DatasetId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRowsRequest'
+      responses:
+        '200':
+          description: Dataset rows added successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /dataset_v2/{dataset_id}/cell:
+    post:
+      operationId: updateDatasetCell
+      tags:
+      - Datasets
+      summary: Update a cell in a dataset
+      description: Update the value of a single cell (row/column) in a dataset.
+      parameters:
+      - $ref: '#/components/parameters/DatasetId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCellRequest'
+      responses:
+        '200':
+          description: Cell updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Dataset:
+      type: object
+      properties:
+        id:
+          type: string
+        source:
+          type: string
+        user_id:
+          type: string
+        org_id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        language_model_id:
+          type: string
+        prompt_template:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    AddRowsRequest:
+      type: object
+      required:
+      - dataset_rows
+      properties:
+        dataset_rows:
+          type: array
+          maxItems: 1000
+          items:
+            $ref: '#/components/schemas/DatasetRow'
+    UpdateCellRequest:
+      type: object
+      required:
+      - row_no
+      - column_name
+      - value
+      properties:
+        row_no:
+          type: integer
+        column_name:
+          type: string
+        value:
+          type: string
+    CreateDatasetRequest:
+      type: object
+      required:
+      - source
+      - name
+      properties:
+        source:
+          type: string
+          example: api
+        name:
+          type: string
+        description:
+          type: string
+        language_model_id:
+          type: string
+        prompt_template:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        dataset_rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/DatasetRow'
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    SuccessMessage:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: Dataset rows added successfully
+    DatasetRow:
+      type: object
+      properties:
+        query:
+          type: string
+        context:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        response:
+          type: string
+        expected_response:
+          type: string
+      additionalProperties: true
+    Message:
+      type: object
+      properties:
+        role:
+          type: string
+          example: user
+        content:
+          type: string
+          example: What is the capital of France?
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid athina-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    DatasetId:
+      name: dataset_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    athinaApiKey:
+      type: apiKey
+      in: header
+      name: athina-api-key
+      description: Athina API key created in the Athina platform settings.
