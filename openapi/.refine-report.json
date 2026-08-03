@@ -1,0 +1,22 @@
+{
+  "provider": "athina",
+  "sources": [
+    "athina-datasets-api-openapi.yml",
+    "athina-evaluations-api-openapi.yml",
+    "athina-logging-api-openapi.yml",
+    "athina-prompts-api-openapi.yml",
+    "athina-tracing-api-openapi.yml"
+  ],
+  "outputs": [
+    "athina-datasets-api-openapi.yml",
+    "athina-evaluations-api-openapi.yml",
+    "athina-logging-api-openapi.yml",
+    "athina-prompts-api-openapi.yml",
+    "athina-tracing-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
