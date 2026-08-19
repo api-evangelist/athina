@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Athina AI Datasets Tracing API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "athina-api-key",
+      "value": "{{athina-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tracing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a trace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.athina.ai/api/v1/trace/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new trace for an application run. A trace must contain at least one span with span_type \"generation\" to be visible in the Athina UI."
+        },
+        {
+          "info": {
+            "name": "Get a trace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.athina.ai/api/v1/trace/:trace_id",
+            "params": [
+              {
+                "name": "trace_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a trace by its id, including all associated spans."
+        },
+        {
+          "info": {
+            "name": "Update a trace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.athina.ai/api/v1/trace/:trace_id",
+            "params": [
+              {
+                "name": "trace_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a trace's name and timing."
+        },
+        {
+          "info": {
+            "name": "Create a span",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.athina.ai/api/v1/trace/:trace_id/spans",
+            "params": [
+              {
+                "name": "trace_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a span within a trace. Use span_type \"generation\" for LLM calls, which makes the parent trace visible in the Athina UI."
+        },
+        {
+          "info": {
+            "name": "Get a span",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.athina.ai/api/v1/trace/:trace_id/spans/:span_id",
+            "params": [
+              {
+                "name": "trace_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "span_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a single span within a trace."
+        },
+        {
+          "info": {
+            "name": "Update a span",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.athina.ai/api/v1/trace/:trace_id/spans/:span_id",
+            "params": [
+              {
+                "name": "trace_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "span_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a span's name, type, and timing."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

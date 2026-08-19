@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Athina AI Datasets Logging API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "athina-api-key",
+      "value": "{{athina-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Logging",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Log an LLM inference",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.athina.ai/api/v1/log/inference",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Logs a single LLM inference (prompt run) to Athina for monitoring and evaluation. The prompt may be a plain string or an OpenAI-style messages array. Optional fields capture token usage, cost, latency, retrieved context, and customer/session metadata for segmentation."
+        },
+        {
+          "info": {
+            "name": "Update a log by id",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.athina.ai/api/v1/logs/:log_id",
+            "params": [
+              {
+                "name": "log_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update fields on a previously logged inference by its Athina log id."
+        },
+        {
+          "info": {
+            "name": "Update a log by external reference id",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.athina.ai/api/v1/logs/external/:external_reference_id",
+            "params": [
+              {
+                "name": "external_reference_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a previously logged inference using the caller-supplied external_reference_id, useful when the Athina log id is not retained."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

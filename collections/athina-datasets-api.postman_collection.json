@@ -1,0 +1,907 @@
+{
+  "item": [
+    {
+      "id": "a0b84c89-b364-42b3-a0fb-d7c7efab026f",
+      "name": "Datasets",
+      "description": {
+        "content": "Create and manage datasets used for evals and experiments.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a1bfd080-d7ab-460f-962e-754588ed68a8",
+          "name": "Create a dataset",
+          "request": {
+            "name": "Create a dataset",
+            "description": {
+              "content": "Create a new dataset, optionally seeding it with prompt template and rows. A dataset holds up to 1000 rows and is used as input for evaluations and experiments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataset_v2"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"language_model_id\": \"<string>\",\n  \"prompt_template\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"dataset_rows\": [\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\"\n    },\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7afe1a1a-f84c-4b36-9dee-02e434f4d7ac",
+              "name": "Dataset created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset_v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": \"api\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"language_model_id\": \"<string>\",\n  \"prompt_template\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    }\n  ],\n  \"dataset_rows\": [\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\",\n      \"key_0\": false\n    },\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"source\": \"string\",\n  \"user_id\": \"string\",\n  \"org_id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"language_model_id\": \"string\",\n  \"prompt_template\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    }\n  ],\n  \"created_at\": \"1984-03-28T11:32:42.940Z\",\n  \"updated_at\": \"1968-07-01T21:21:14.099Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df0b2027-7524-4633-b6f8-3285ea024d09",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset_v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": \"api\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"language_model_id\": \"<string>\",\n  \"prompt_template\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    }\n  ],\n  \"dataset_rows\": [\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\",\n      \"key_0\": false\n    },\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa426970-0fed-44fd-a3eb-7135f613c8f6",
+          "name": "Get a dataset",
+          "request": {
+            "name": "Get a dataset",
+            "description": {
+              "content": "Retrieve a dataset by id, including its rows.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataset_v2",
+                ":dataset_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataset_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ca4ad9ec-1109-46f7-9b53-2dfb3991ba5d",
+              "name": "Dataset retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset_v2",
+                    ":dataset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"source\": \"string\",\n  \"user_id\": \"string\",\n  \"org_id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"language_model_id\": \"string\",\n  \"prompt_template\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    }\n  ],\n  \"created_at\": \"2023-11-18T10:33:38.349Z\",\n  \"updated_at\": \"2003-11-10T03:06:15.508Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c384600-8834-4034-9dfd-050059b79186",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset_v2",
+                    ":dataset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f873c146-7d58-48ef-8c80-80557fb7da15",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset_v2",
+                    ":dataset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5814692e-5306-4ad2-a977-979d78b00aa2",
+          "name": "Delete a dataset",
+          "request": {
+            "name": "Delete a dataset",
+            "description": {
+              "content": "Delete a dataset by id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataset_v2",
+                ":dataset_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataset_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d64dc6cc-4a14-401e-a967-aae8ea703c2b",
+              "name": "Dataset deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset_v2",
+                    ":dataset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"message\": \"Dataset rows added successfully\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40270fb4-844e-4536-b5ec-ea20f1845099",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset_v2",
+                    ":dataset_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "532810a5-b00d-420e-b1dd-37ade7d49d19",
+          "name": "Add rows to a dataset",
+          "request": {
+            "name": "Add rows to a dataset",
+            "description": {
+              "content": "Append rows to an existing dataset. Each row may include query, context, response, expected_response, and arbitrary custom key-value pairs. Field value types must be consistent across rows; maximum 1000 rows per dataset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataset_v2",
+                ":dataset_id",
+                "add-rows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataset_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset_rows\": [\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\"\n    },\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\",\n      \"key_0\": 8842.44760770185,\n      \"key_1\": 8276.14115817464\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2e4cdd30-5672-4b8f-9290-3b4230c9d7e9",
+              "name": "Dataset rows added successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset_v2",
+                    ":dataset_id",
+                    "add-rows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_rows\": [\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\",\n      \"key_0\": 4237\n    },\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"message\": \"Dataset rows added successfully\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3048bb01-31e3-4241-9b93-4fdcd3933e45",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset_v2",
+                    ":dataset_id",
+                    "add-rows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_rows\": [\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\",\n      \"key_0\": 4237\n    },\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "475ca689-11a4-42f1-9c06-0b572cf8ee8c",
+          "name": "Update a cell in a dataset",
+          "request": {
+            "name": "Update a cell in a dataset",
+            "description": {
+              "content": "Update the value of a single cell (row/column) in a dataset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataset_v2",
+                ":dataset_id",
+                "cell"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "dataset_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"row_no\": \"<integer>\",\n  \"column_name\": \"<string>\",\n  \"value\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cd39433d-5ad3-40fc-a473-3198d0c76915",
+              "name": "Cell updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset_v2",
+                    ":dataset_id",
+                    "cell"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"row_no\": \"<integer>\",\n  \"column_name\": \"<string>\",\n  \"value\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"message\": \"Dataset rows added successfully\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c101603-576b-4cb8-95eb-184b1fde778a",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset_v2",
+                    ":dataset_id",
+                    "cell"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "dataset_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"row_no\": \"<integer>\",\n  \"column_name\": \"<string>\",\n  \"value\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.athina.ai/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "athina-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c5367283-7f30-4bf4-8c54-8b380ca7764c",
+    "name": "Athina AI Datasets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Athina AI LLM monitoring, evaluation, and experimentation platform. Log inferences and prompt runs, build traces and spans, manage datasets, run evaluations, and create, version, and run prompt templates. All requests authenticate with an `athina-api-key` header. Inference and prompt-run logging is served from the `https://log.athina.ai` host; all other resources are served from `https://api.athina.ai/api/v1`.\n\nContact Support:\n Name: Athina AI Support\n Email: hello@athina.ai",
+      "type": "text/plain"
+    }
+  }
+}

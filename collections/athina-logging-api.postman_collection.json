@@ -1,0 +1,564 @@
+{
+  "item": [
+    {
+      "id": "3fdb45c4-3258-4981-91c1-1875111c65f0",
+      "name": "Logging",
+      "description": {
+        "content": "Log LLM inferences and prompt runs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7530cca7-4448-430c-b62a-c2f34a716a31",
+          "name": "Log an LLM inference",
+          "request": {
+            "name": "Log an LLM inference",
+            "description": {
+              "content": "Logs a single LLM inference (prompt run) to Athina for monitoring and evaluation. The prompt may be a plain string or an OpenAI-style messages array. Optional fields capture token usage, cost, latency, retrieved context, and customer/session metadata for segmentation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "log",
+                "inference"
+              ],
+              "host": [
+                "{{log-inference-Url}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"language_model_id\": \"<string>\",\n  \"prompt\": \"<string>\",\n  \"response\": \"<string>\",\n  \"user_query\": \"<string>\",\n  \"context\": \"<string>\",\n  \"expected_response\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"prompt_tokens\": \"<number>\",\n  \"completion_tokens\": \"<number>\",\n  \"total_tokens\": \"<number>\",\n  \"cost\": \"<number>\",\n  \"response_time\": \"<number>\",\n  \"environment\": \"<string>\",\n  \"prompt_slug\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"customer_user_id\": \"<string>\",\n  \"external_reference_id\": \"<string>\",\n  \"functions\": \"<object>\",\n  \"function_call_response\": \"<string>\",\n  \"tools\": \"<object>\",\n  \"tool_calls\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5ca0715f-cac9-4b03-bf1b-729a8bf4614d",
+              "name": "Inference logged successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log",
+                    "inference"
+                  ],
+                  "host": [
+                    "{{log-inference-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"language_model_id\": \"gpt-4o\",\n  \"prompt\": \"<string>\",\n  \"response\": \"<string>\",\n  \"user_query\": \"<string>\",\n  \"context\": \"<string>\",\n  \"expected_response\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"prompt_tokens\": \"<number>\",\n  \"completion_tokens\": \"<number>\",\n  \"total_tokens\": \"<number>\",\n  \"cost\": \"<number>\",\n  \"response_time\": \"<number>\",\n  \"environment\": \"production\",\n  \"prompt_slug\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"customer_user_id\": \"<string>\",\n  \"external_reference_id\": \"<string>\",\n  \"functions\": \"<object>\",\n  \"function_call_response\": \"<string>\",\n  \"tools\": \"<object>\",\n  \"tool_calls\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"prompt_run_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0890cc4b-2f20-4d6a-a442-1b48d03cfba0",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "log",
+                    "inference"
+                  ],
+                  "host": [
+                    "{{log-inference-Url}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"language_model_id\": \"gpt-4o\",\n  \"prompt\": \"<string>\",\n  \"response\": \"<string>\",\n  \"user_query\": \"<string>\",\n  \"context\": \"<string>\",\n  \"expected_response\": \"<string>\",\n  \"session_id\": \"<string>\",\n  \"prompt_tokens\": \"<number>\",\n  \"completion_tokens\": \"<number>\",\n  \"total_tokens\": \"<number>\",\n  \"cost\": \"<number>\",\n  \"response_time\": \"<number>\",\n  \"environment\": \"production\",\n  \"prompt_slug\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"customer_user_id\": \"<string>\",\n  \"external_reference_id\": \"<string>\",\n  \"functions\": \"<object>\",\n  \"function_call_response\": \"<string>\",\n  \"tools\": \"<object>\",\n  \"tool_calls\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4d066e3-1107-4e81-b626-b9747d93e519",
+          "name": "Update a log by id",
+          "request": {
+            "name": "Update a log by id",
+            "description": {
+              "content": "Update fields on a previously logged inference by its Athina log id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "logs",
+                ":log_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "log_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expected_response\": \"<string>\",\n  \"context\": \"<string>\",\n  \"metadata\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "279cd0f2-6215-4f1f-a79a-3caf945b6744",
+              "name": "Log updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logs",
+                    ":log_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "log_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expected_response\": \"<string>\",\n  \"context\": \"<string>\",\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"message\": \"Dataset rows added successfully\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad44a775-7205-460a-a75e-0badf692d3e7",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logs",
+                    ":log_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "log_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expected_response\": \"<string>\",\n  \"context\": \"<string>\",\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9299007c-6b3a-4001-b278-2551954f690e",
+          "name": "Update a log by external reference id",
+          "request": {
+            "name": "Update a log by external reference id",
+            "description": {
+              "content": "Update a previously logged inference using the caller-supplied external_reference_id, useful when the Athina log id is not retained.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "logs",
+                "external",
+                ":external_reference_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "external_reference_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expected_response\": \"<string>\",\n  \"context\": \"<string>\",\n  \"metadata\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "14ecc795-fdfc-436a-b10b-35a11b824894",
+              "name": "Log updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logs",
+                    "external",
+                    ":external_reference_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external_reference_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expected_response\": \"<string>\",\n  \"context\": \"<string>\",\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"success\",\n  \"message\": \"Dataset rows added successfully\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a16ae43f-26e7-43b2-b2f5-67197f963943",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "logs",
+                    "external",
+                    ":external_reference_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external_reference_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expected_response\": \"<string>\",\n  \"context\": \"<string>\",\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.athina.ai/api/v1",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://log.athina.ai/api/v1",
+      "key": "log-inference-Url"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "athina-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "143d219f-bf6a-47a3-8a94-cc8f3a4a2e01",
+    "name": "Athina AI Datasets Logging API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Athina AI LLM monitoring, evaluation, and experimentation platform. Log inferences and prompt runs, build traces and spans, manage datasets, run evaluations, and create, version, and run prompt templates. All requests authenticate with an `athina-api-key` header. Inference and prompt-run logging is served from the `https://log.athina.ai` host; all other resources are served from `https://api.athina.ai/api/v1`.\n\nContact Support:\n Name: Athina AI Support\n Email: hello@athina.ai",
+      "type": "text/plain"
+    }
+  }
+}

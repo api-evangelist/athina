@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Athina AI Datasets Evaluations API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "athina-api-key",
+      "value": "{{athina-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Evaluations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Run an evaluation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.athina.ai/api/v1/eval/run",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run one or more preset or custom evaluations against a dataset or set of inference rows. Evaluations grade attributes such as faithfulness, context relevance, answer relevance, and summarization quality."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

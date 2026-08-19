@@ -1,0 +1,202 @@
+{
+  "item": [
+    {
+      "id": "294f3293-17ff-4d41-9aef-b1d5e22a1532",
+      "name": "Evaluations",
+      "description": {
+        "content": "Run evaluations against datasets and logged inferences.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "30e0e5fc-27c3-4751-a9ae-6a1a0c900110",
+          "name": "Run an evaluation",
+          "request": {
+            "name": "Run an evaluation",
+            "description": {
+              "content": "Run one or more preset or custom evaluations against a dataset or set of inference rows. Evaluations grade attributes such as faithfulness, context relevance, answer relevance, and summarization quality.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "eval",
+                "run"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"evals\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"key_0\": \"string\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"config\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    }\n  ],\n  \"dataset_id\": \"<string>\",\n  \"rows\": [\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\",\n      \"key_0\": false,\n      \"key_1\": \"string\"\n    },\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\"\n    }\n  ],\n  \"model\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d8c1599e-3596-47a0-b549-6304bbe3b725",
+              "name": "Evaluation run accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eval",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"evals\": [\n    {\n      \"name\": \"DoesResponseAnswerQuery\",\n      \"type\": \"llm_grader\",\n      \"config\": {\n        \"key_0\": \"string\",\n        \"key_1\": true,\n        \"key_2\": \"string\",\n        \"key_3\": 438.56565360022137\n      }\n    },\n    {\n      \"name\": \"DoesResponseAnswerQuery\",\n      \"type\": \"llm_grader\",\n      \"config\": {\n        \"key_0\": false,\n        \"key_1\": 2759,\n        \"key_2\": 6926.907957387995\n      }\n    }\n  ],\n  \"dataset_id\": \"<string>\",\n  \"rows\": [\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\",\n      \"key_0\": 4669.225913232984,\n      \"key_1\": 8343\n    },\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\"\n    }\n  ],\n  \"model\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"eval_request_id\": \"string\",\n  \"status\": \"string\",\n  \"results\": [\n    {\n      \"eval_name\": \"string\",\n      \"passed\": false,\n      \"score\": 9316.402526226977,\n      \"reason\": \"string\"\n    },\n    {\n      \"eval_name\": \"string\",\n      \"passed\": true,\n      \"score\": 819.276701709959,\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34312dad-b4d9-4851-9543-85fe5345515e",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eval",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"evals\": [\n    {\n      \"name\": \"DoesResponseAnswerQuery\",\n      \"type\": \"llm_grader\",\n      \"config\": {\n        \"key_0\": \"string\",\n        \"key_1\": true,\n        \"key_2\": \"string\",\n        \"key_3\": 438.56565360022137\n      }\n    },\n    {\n      \"name\": \"DoesResponseAnswerQuery\",\n      \"type\": \"llm_grader\",\n      \"config\": {\n        \"key_0\": false,\n        \"key_1\": 2759,\n        \"key_2\": 6926.907957387995\n      }\n    }\n  ],\n  \"dataset_id\": \"<string>\",\n  \"rows\": [\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\",\n      \"key_0\": 4669.225913232984,\n      \"key_1\": 8343\n    },\n    {\n      \"query\": \"<string>\",\n      \"context\": \"<string>\",\n      \"response\": \"<string>\",\n      \"expected_response\": \"<string>\"\n    }\n  ],\n  \"model\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.athina.ai/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "athina-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6ab43144-aa72-48cf-aa5e-794de962b465",
+    "name": "Athina AI Datasets Evaluations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Athina AI LLM monitoring, evaluation, and experimentation platform. Log inferences and prompt runs, build traces and spans, manage datasets, run evaluations, and create, version, and run prompt templates. All requests authenticate with an `athina-api-key` header. Inference and prompt-run logging is served from the `https://log.athina.ai` host; all other resources are served from `https://api.athina.ai/api/v1`.\n\nContact Support:\n Name: Athina AI Support\n Email: hello@athina.ai",
+      "type": "text/plain"
+    }
+  }
+}

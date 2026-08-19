@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Athina AI Datasets API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "athina-api-key",
+      "value": "{{athina-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.athina.ai/api/v1/dataset_v2",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new dataset, optionally seeding it with prompt template and rows. A dataset holds up to 1000 rows and is used as input for evaluations and experiments."
+        },
+        {
+          "info": {
+            "name": "Get a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.athina.ai/api/v1/dataset_v2/:dataset_id",
+            "params": [
+              {
+                "name": "dataset_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a dataset by id, including its rows."
+        },
+        {
+          "info": {
+            "name": "Delete a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.athina.ai/api/v1/dataset_v2/:dataset_id",
+            "params": [
+              {
+                "name": "dataset_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a dataset by id."
+        },
+        {
+          "info": {
+            "name": "Add rows to a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.athina.ai/api/v1/dataset_v2/:dataset_id/add-rows",
+            "params": [
+              {
+                "name": "dataset_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Append rows to an existing dataset. Each row may include query, context, response, expected_response, and arbitrary custom key-value pairs. Field value types must be consistent across rows; maximum 1000 rows per dataset."
+        },
+        {
+          "info": {
+            "name": "Update a cell in a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.athina.ai/api/v1/dataset_v2/:dataset_id/cell",
+            "params": [
+              {
+                "name": "dataset_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the value of a single cell (row/column) in a dataset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

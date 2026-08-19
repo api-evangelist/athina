@@ -1,0 +1,610 @@
+{
+  "item": [
+    {
+      "id": "37b66be5-8e08-4ed5-be20-499d3f1aa137",
+      "name": "Prompts",
+      "description": {
+        "content": "Create, version, fetch, and run prompt templates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "64536cf1-182e-42a0-8447-ce4531f06c30",
+          "name": "Create or version a prompt template",
+          "request": {
+            "name": "Create or version a prompt template",
+            "description": {
+              "content": "Create a prompt template at the given slug, or create a new incremented version if the slug already exists. Supports template variables of the form {{variable_name}} within message content.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "prompt",
+                ":prompt_slug"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "prompt_slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"model\": \"<string>\",\n  \"parameters\": {\n    \"temperature\": \"<number>\",\n    \"max_tokens\": \"<integer>\",\n    \"top_p\": \"<number>\",\n    \"presence_penalty\": \"<number>\",\n    \"frequency_penalty\": \"<number>\"\n  },\n  \"commit_message\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b19899e8-5f2c-4533-ba88-07dbdfb5d1f4",
+              "name": "Prompt template created or versioned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prompt",
+                    ":prompt_slug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    }\n  ],\n  \"model\": \"gpt-4o\",\n  \"parameters\": {\n    \"temperature\": \"<number>\",\n    \"max_tokens\": \"<integer>\",\n    \"top_p\": \"<number>\",\n    \"presence_penalty\": \"<number>\",\n    \"frequency_penalty\": \"<number>\"\n  },\n  \"commit_message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"slug\": \"string\",\n  \"version\": 954,\n  \"prompt\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    }\n  ],\n  \"model\": \"string\",\n  \"parameters\": {\n    \"temperature\": \"<number>\",\n    \"max_tokens\": \"<integer>\",\n    \"top_p\": \"<number>\",\n    \"presence_penalty\": \"<number>\",\n    \"frequency_penalty\": \"<number>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3b51caf-4a3c-4616-9a27-43e20cd54454",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prompt",
+                    ":prompt_slug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    }\n  ],\n  \"model\": \"gpt-4o\",\n  \"parameters\": {\n    \"temperature\": \"<number>\",\n    \"max_tokens\": \"<integer>\",\n    \"top_p\": \"<number>\",\n    \"presence_penalty\": \"<number>\",\n    \"frequency_penalty\": \"<number>\"\n  },\n  \"commit_message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a72ca0c-27ad-43b2-972e-5420ec744785",
+          "name": "Get the default prompt version",
+          "request": {
+            "name": "Get the default prompt version",
+            "description": {
+              "content": "Fetch the default version of a prompt template by slug.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "prompt",
+                ":prompt_slug",
+                "default"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "prompt_slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe44476f-ee94-48e7-8a79-9d4a40fc3e30",
+              "name": "Prompt template retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prompt",
+                    ":prompt_slug",
+                    "default"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"slug\": \"string\",\n  \"version\": 1924,\n  \"prompt\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"What is the capital of France?\"\n    }\n  ],\n  \"model\": \"string\",\n  \"parameters\": {\n    \"temperature\": \"<number>\",\n    \"max_tokens\": \"<integer>\",\n    \"top_p\": \"<number>\",\n    \"presence_penalty\": \"<number>\",\n    \"frequency_penalty\": \"<number>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96df8022-766c-4809-aab4-26305b765403",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prompt",
+                    ":prompt_slug",
+                    "default"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d005f5b1-b8d1-4ee1-8886-64a4c8b89119",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prompt",
+                    ":prompt_slug",
+                    "default"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a8e89af-bd58-4cf0-961b-1a8719d0021e",
+          "name": "Run a prompt",
+          "request": {
+            "name": "Run a prompt",
+            "description": {
+              "content": "Execute a managed prompt template by slug with input variables. Optional overrides for version, model, and model parameters. Results are recorded on the Athina Observe page.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "prompt",
+                ":prompt_slug",
+                "run"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "prompt_slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"variables\": {\n    \"key_0\": \"string\"\n  },\n  \"version\": \"<integer>\",\n  \"model\": \"<string>\",\n  \"parameters\": {\n    \"temperature\": \"<number>\",\n    \"max_tokens\": \"<integer>\",\n    \"top_p\": \"<number>\",\n    \"presence_penalty\": \"<number>\",\n    \"frequency_penalty\": \"<number>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "543b86ea-f5bb-4e6e-b071-a39d3720918b",
+              "name": "Prompt executed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prompt",
+                    ":prompt_slug",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"variables\": {\n    \"key_0\": 9695\n  },\n  \"version\": \"<integer>\",\n  \"model\": \"<string>\",\n  \"parameters\": {\n    \"temperature\": \"<number>\",\n    \"max_tokens\": \"<integer>\",\n    \"top_p\": \"<number>\",\n    \"presence_penalty\": \"<number>\",\n    \"frequency_penalty\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"prompt_run_id\": \"string\",\n  \"response\": \"string\",\n  \"model\": \"string\",\n  \"usage\": {\n    \"prompt_tokens\": 3332.035151103089,\n    \"completion_tokens\": 1927.1385007370945,\n    \"total_tokens\": 7889.440193432886\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f927d3d7-5e51-4e0b-aed9-f0e0bf307e8c",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "prompt",
+                    ":prompt_slug",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "prompt_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"variables\": {\n    \"key_0\": 9695\n  },\n  \"version\": \"<integer>\",\n  \"model\": \"<string>\",\n  \"parameters\": {\n    \"temperature\": \"<number>\",\n    \"max_tokens\": \"<integer>\",\n    \"top_p\": \"<number>\",\n    \"presence_penalty\": \"<number>\",\n    \"frequency_penalty\": \"<number>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.athina.ai/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "athina-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5b0d8d64-cf3c-4389-ad15-f3ae505a7c94",
+    "name": "Athina AI Datasets Prompts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Athina AI LLM monitoring, evaluation, and experimentation platform. Log inferences and prompt runs, build traces and spans, manage datasets, run evaluations, and create, version, and run prompt templates. All requests authenticate with an `athina-api-key` header. Inference and prompt-run logging is served from the `https://log.athina.ai` host; all other resources are served from `https://api.athina.ai/api/v1`.\n\nContact Support:\n Name: Athina AI Support\n Email: hello@athina.ai",
+      "type": "text/plain"
+    }
+  }
+}

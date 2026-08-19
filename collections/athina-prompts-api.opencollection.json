@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Athina AI Datasets Prompts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "athina-api-key",
+      "value": "{{athina-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Prompts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create or version a prompt template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.athina.ai/api/v1/prompt/:prompt_slug",
+            "params": [
+              {
+                "name": "prompt_slug",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a prompt template at the given slug, or create a new incremented version if the slug already exists. Supports template variables of the form {{variable_name}} within message content."
+        },
+        {
+          "info": {
+            "name": "Get the default prompt version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.athina.ai/api/v1/prompt/:prompt_slug/default",
+            "params": [
+              {
+                "name": "prompt_slug",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch the default version of a prompt template by slug."
+        },
+        {
+          "info": {
+            "name": "Run a prompt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.athina.ai/api/v1/prompt/:prompt_slug/run",
+            "params": [
+              {
+                "name": "prompt_slug",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a managed prompt template by slug with input variables. Optional overrides for version, model, and model parameters. Results are recorded on the Athina Observe page."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

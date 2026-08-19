@@ -1,0 +1,1199 @@
+{
+  "item": [
+    {
+      "id": "f080cf64-fb61-444c-8773-700543232382",
+      "name": "Tracing",
+      "description": {
+        "content": "Create and manage traces and spans.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "95af558d-735b-44de-b73e-a604e720fb58",
+          "name": "Create a trace",
+          "request": {
+            "name": "Create a trace",
+            "description": {
+              "content": "Create a new trace for an application run. A trace must contain at least one span with span_type \"generation\" to be visible in the Athina UI.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trace",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"start_time\": \"<dateTime>\",\n  \"status\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": 7739,\n    \"key_1\": \"string\",\n    \"key_2\": 8260.768615299894,\n    \"key_3\": 3188\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "905c3a61-2170-49fd-a980-b469e602d4dc",
+              "name": "Trace created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"start_time\": \"<dateTime>\",\n  \"status\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": 4853.444449749708,\n    \"key_1\": 5953.799069520208,\n    \"key_2\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"start_time\": \"1974-03-22T23:52:23.311Z\",\n  \"end_time\": \"1991-10-11T12:01:48.546Z\",\n  \"status\": \"string\",\n  \"attributes\": {\n    \"key_0\": 4545,\n    \"key_1\": 4053,\n    \"key_2\": \"string\"\n  },\n  \"spans\": [\n    {\n      \"id\": \"string\",\n      \"trace_id\": \"string\",\n      \"name\": \"string\",\n      \"span_type\": \"string\",\n      \"start_time\": \"2020-11-25T14:40:32.660Z\",\n      \"end_time\": \"2007-12-03T16:17:19.069Z\",\n      \"status\": \"string\",\n      \"attributes\": {\n        \"key_0\": true\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"trace_id\": \"string\",\n      \"name\": \"string\",\n      \"span_type\": \"string\",\n      \"start_time\": \"2017-11-23T10:37:22.299Z\",\n      \"end_time\": \"2017-10-26T03:04:29.527Z\",\n      \"status\": \"string\",\n      \"attributes\": {\n        \"key_0\": 3318.8469340407046\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d8bb164-e5d1-42fa-811a-25b138726c3c",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"start_time\": \"<dateTime>\",\n  \"status\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": 4853.444449749708,\n    \"key_1\": 5953.799069520208,\n    \"key_2\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b71735cc-9837-42d0-b1f8-a3120bede5b2",
+          "name": "Get a trace",
+          "request": {
+            "name": "Get a trace",
+            "description": {
+              "content": "Retrieve a trace by its id, including all associated spans.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trace",
+                ":trace_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "trace_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48de595d-6d7f-4414-a218-ee08ba734bb9",
+              "name": "Trace retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":trace_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trace_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"start_time\": \"2016-03-10T13:52:47.119Z\",\n  \"end_time\": \"2026-08-05T08:43:35.420Z\",\n  \"status\": \"string\",\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": true,\n    \"key_2\": false\n  },\n  \"spans\": [\n    {\n      \"id\": \"string\",\n      \"trace_id\": \"string\",\n      \"name\": \"string\",\n      \"span_type\": \"string\",\n      \"start_time\": \"2020-05-03T05:31:29.270Z\",\n      \"end_time\": \"2002-06-19T21:10:14.266Z\",\n      \"status\": \"string\",\n      \"attributes\": {\n        \"key_0\": 3943,\n        \"key_1\": 7795.17111283853\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"trace_id\": \"string\",\n      \"name\": \"string\",\n      \"span_type\": \"string\",\n      \"start_time\": \"2012-11-27T18:32:51.665Z\",\n      \"end_time\": \"2004-12-20T15:14:35.591Z\",\n      \"status\": \"string\",\n      \"attributes\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38ff4771-da05-4533-88d8-bdbca1925bfb",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":trace_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trace_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42d88868-0520-4c23-9f70-90dbbb79db5d",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":trace_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trace_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5855a2d4-c0a0-4db0-9992-f3eccae3c0f2",
+          "name": "Update a trace",
+          "request": {
+            "name": "Update a trace",
+            "description": {
+              "content": "Update a trace's name and timing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trace",
+                ":trace_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "trace_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3a77697c-cf2f-4ea2-af28-bdeae6e147ac",
+              "name": "Trace updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":trace_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trace_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"start_time\": \"2016-03-10T13:52:47.119Z\",\n  \"end_time\": \"2026-08-05T08:43:35.420Z\",\n  \"status\": \"string\",\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": true,\n    \"key_2\": false\n  },\n  \"spans\": [\n    {\n      \"id\": \"string\",\n      \"trace_id\": \"string\",\n      \"name\": \"string\",\n      \"span_type\": \"string\",\n      \"start_time\": \"2020-05-03T05:31:29.270Z\",\n      \"end_time\": \"2002-06-19T21:10:14.266Z\",\n      \"status\": \"string\",\n      \"attributes\": {\n        \"key_0\": 3943,\n        \"key_1\": 7795.17111283853\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"trace_id\": \"string\",\n      \"name\": \"string\",\n      \"span_type\": \"string\",\n      \"start_time\": \"2012-11-27T18:32:51.665Z\",\n      \"end_time\": \"2004-12-20T15:14:35.591Z\",\n      \"status\": \"string\",\n      \"attributes\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e411c4f-b42f-4030-833d-57a9db2da484",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":trace_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trace_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d3df784-6271-4381-8ec0-a9e3e010a8fe",
+          "name": "Create a span",
+          "request": {
+            "name": "Create a span",
+            "description": {
+              "content": "Create a span within a trace. Use span_type \"generation\" for LLM calls, which makes the parent trace visible in the Athina UI.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trace",
+                ":trace_id",
+                "spans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "trace_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"trace_id\": \"<string>\",\n  \"span_type\": \"<string>\",\n  \"start_time\": \"<dateTime>\",\n  \"status\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": 2266,\n    \"key_2\": 4744.206977439562,\n    \"key_3\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4903317f-cdce-4f9f-a45d-cb940acf891b",
+              "name": "Span created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":trace_id",
+                    "spans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trace_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"trace_id\": \"<string>\",\n  \"span_type\": \"generation\",\n  \"start_time\": \"<dateTime>\",\n  \"status\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"trace_id\": \"string\",\n  \"name\": \"string\",\n  \"span_type\": \"string\",\n  \"start_time\": \"1958-01-29T04:10:38.993Z\",\n  \"end_time\": \"1981-01-20T14:49:44.702Z\",\n  \"status\": \"string\",\n  \"attributes\": {\n    \"key_0\": false,\n    \"key_1\": 6461.461432912676,\n    \"key_2\": 3459,\n    \"key_3\": 6123.0578713532095\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99eef701-b09d-4003-9b55-87d2d191c38a",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":trace_id",
+                    "spans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trace_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"trace_id\": \"<string>\",\n  \"span_type\": \"generation\",\n  \"start_time\": \"<dateTime>\",\n  \"status\": \"<string>\",\n  \"attributes\": {\n    \"key_0\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abf03eaf-df75-4e2d-9913-ab48142e2b1a",
+          "name": "Get a span",
+          "request": {
+            "name": "Get a span",
+            "description": {
+              "content": "Retrieve a single span within a trace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trace",
+                ":trace_id",
+                "spans",
+                ":span_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "trace_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "span_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "153a2f83-5aba-41ba-b91a-cdbd094286e3",
+              "name": "Span retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":trace_id",
+                    "spans",
+                    ":span_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trace_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "span_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"trace_id\": \"string\",\n  \"name\": \"string\",\n  \"span_type\": \"string\",\n  \"start_time\": \"1958-01-29T04:10:38.993Z\",\n  \"end_time\": \"1981-01-20T14:49:44.702Z\",\n  \"status\": \"string\",\n  \"attributes\": {\n    \"key_0\": false,\n    \"key_1\": 6461.461432912676,\n    \"key_2\": 3459,\n    \"key_3\": 6123.0578713532095\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9613b733-d5fb-4903-a910-9399c19dd5c0",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":trace_id",
+                    "spans",
+                    ":span_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trace_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "span_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d74a81b-84c2-484a-8ef7-5c4cc0041e3e",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":trace_id",
+                    "spans",
+                    ":span_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trace_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "span_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "866af2ff-e7a6-4416-bc0a-5dd32a5808a5",
+          "name": "Update a span",
+          "request": {
+            "name": "Update a span",
+            "description": {
+              "content": "Update a span's name, type, and timing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trace",
+                ":trace_id",
+                "spans",
+                ":span_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "trace_id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "span_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"span_type\": \"<string>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "56b53d8e-4cc5-4c99-aa6e-50a485f4fe3f",
+              "name": "Span updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":trace_id",
+                    "spans",
+                    ":span_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trace_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "span_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"span_type\": \"<string>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"trace_id\": \"string\",\n  \"name\": \"string\",\n  \"span_type\": \"string\",\n  \"start_time\": \"1958-01-29T04:10:38.993Z\",\n  \"end_time\": \"1981-01-20T14:49:44.702Z\",\n  \"status\": \"string\",\n  \"attributes\": {\n    \"key_0\": false,\n    \"key_1\": 6461.461432912676,\n    \"key_2\": 3459,\n    \"key_3\": 6123.0578713532095\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01d58804-ed21-41e4-93bf-b5f82f293eea",
+              "name": "Missing or invalid athina-api-key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":trace_id",
+                    "spans",
+                    ":span_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "trace_id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "span_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "athina-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"span_type\": \"<string>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.athina.ai/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "athina-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1dcad29c-837b-46b1-996c-dd0dd57fe569",
+    "name": "Athina AI Datasets Tracing API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Athina AI LLM monitoring, evaluation, and experimentation platform. Log inferences and prompt runs, build traces and spans, manage datasets, run evaluations, and create, version, and run prompt templates. All requests authenticate with an `athina-api-key` header. Inference and prompt-run logging is served from the `https://log.athina.ai` host; all other resources are served from `https://api.athina.ai/api/v1`.\n\nContact Support:\n Name: Athina AI Support\n Email: hello@athina.ai",
+      "type": "text/plain"
+    }
+  }
+}
