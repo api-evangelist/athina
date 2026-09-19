@@ -85,6 +85,8 @@ apis:
   humanURL: https://docs.athina.ai/api-reference/logging/log-via-api-request
   baseURL: https://api.athina.ai/api/v1
   tags:
+  - Evaluation
+  tags_raw:
   - Evaluations
   properties:
   - type: OpenAPI
