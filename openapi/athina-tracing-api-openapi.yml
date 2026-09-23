@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Athina AI Datasets Tracing API
+  title: Athina AI Tracing API
   description: REST API for the Athina AI LLM monitoring, evaluation, and experimentation platform. Log inferences and prompt runs, build traces and spans, manage datasets, run evaluations, and create, version, and run prompt templates. All requests authenticate with an `athina-api-key` header. Inference and prompt-run logging is served from the `https://log.athina.ai` host; all other resources are served from `https://api.athina.ai/api/v1`.
   termsOfService: https://www.athina.ai/terms
   contact:
@@ -154,20 +154,59 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    SpanId:
-      name: span_id
-      in: path
-      required: true
-      schema:
-        type: string
-    TraceId:
-      name: trace_id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
+    Span:
+      type: object
+      properties:
+        id:
+          type: string
+        trace_id:
+          type: string
+        name:
+          type: string
+        span_type:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        status:
+          type: string
+        attributes:
+          type: object
+          additionalProperties: true
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    CreateSpanRequest:
+      type: object
+      required:
+      - name
+      - trace_id
+      - span_type
+      - start_time
+      properties:
+        name:
+          type: string
+        trace_id:
+          type: string
+        span_type:
+          type: string
+          example: generation
+        start_time:
+          type: string
+          format: date-time
+        status:
+          type: string
+        attributes:
+          type: object
+          additionalProperties: true
     UpdateSpanRequest:
       type: object
       properties:
@@ -203,29 +242,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Span'
-    CreateSpanRequest:
+    UpdateTraceRequest:
       type: object
-      required:
-      - name
-      - trace_id
-      - span_type
-      - start_time
       properties:
         name:
           type: string
-        trace_id:
-          type: string
-        span_type:
-          type: string
-          example: generation
         start_time:
           type: string
           format: date-time
-        status:
+        end_time:
           type: string
-        attributes:
-          type: object
-          additionalProperties: true
+          format: date-time
     CreateTraceRequest:
       type: object
       required:
@@ -242,59 +269,32 @@ components:
         attributes:
           type: object
           additionalProperties: true
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-        message:
-          type: string
-    UpdateTraceRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        start_time:
-          type: string
-          format: date-time
-        end_time:
-          type: string
-          format: date-time
-    Span:
-      type: object
-      properties:
-        id:
-          type: string
-        trace_id:
-          type: string
-        name:
-          type: string
-        span_type:
-          type: string
-        start_time:
-          type: string
-          format: date-time
-        end_time:
-          type: string
-          format: date-time
-        status:
-          type: string
-        attributes:
-          type: object
-          additionalProperties: true
   responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Missing or invalid athina-api-key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    SpanId:
+      name: span_id
+      in: path
+      required: true
+      schema:
+        type: string
+    TraceId:
+      name: trace_id
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     athinaApiKey:
       type: apiKey

@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Athina AI Datasets API
   description: REST API for the Athina AI LLM monitoring, evaluation, and experimentation platform. Log inferences and prompt runs, build traces and spans, manage datasets, run evaluations, and create, version, and run prompt templates. All requests authenticate with an `athina-api-key` header. Inference and prompt-run logging is served from the `https://log.athina.ai` host; all other resources are served from `https://api.athina.ai/api/v1`.
@@ -155,6 +155,15 @@ components:
         updated_at:
           type: string
           format: date-time
+    SuccessMessage:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: Dataset rows added successfully
     AddRowsRequest:
       type: object
       required:
@@ -165,6 +174,38 @@ components:
           maxItems: 1000
           items:
             $ref: '#/components/schemas/DatasetRow'
+    DatasetRow:
+      type: object
+      properties:
+        query:
+          type: string
+        context:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        response:
+          type: string
+        expected_response:
+          type: string
+      additionalProperties: true
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    Message:
+      type: object
+      properties:
+        role:
+          type: string
+          example: user
+        content:
+          type: string
+          example: What is the capital of France?
     UpdateCellRequest:
       type: object
       required:
@@ -201,56 +242,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DatasetRow'
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-        message:
-          type: string
-    SuccessMessage:
-      type: object
-      properties:
-        status:
-          type: string
-          example: success
-        message:
-          type: string
-          example: Dataset rows added successfully
-    DatasetRow:
-      type: object
-      properties:
-        query:
-          type: string
-        context:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-        response:
-          type: string
-        expected_response:
-          type: string
-      additionalProperties: true
-    Message:
-      type: object
-      properties:
-        role:
-          type: string
-          example: user
-        content:
-          type: string
-          example: What is the capital of France?
   responses:
-    NotFound:
-      description: Resource not found.
+    Unauthorized:
+      description: Missing or invalid athina-api-key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid athina-api-key.
+    NotFound:
+      description: Resource not found.
       content:
         application/json:
           schema:

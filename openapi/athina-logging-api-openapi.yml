@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Athina AI Datasets Logging API
+  title: Athina AI Logging API
   description: REST API for the Athina AI LLM monitoring, evaluation, and experimentation platform. Log inferences and prompt runs, build traces and spans, manage datasets, run evaluations, and create, version, and run prompt templates. All requests authenticate with an `athina-api-key` header. Inference and prompt-run logging is served from the `https://log.athina.ai` host; all other resources are served from `https://api.athina.ai/api/v1`.
   termsOfService: https://www.athina.ai/terms
   contact:
@@ -97,6 +97,39 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    SuccessMessage:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: Dataset rows added successfully
+    LogInferenceResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        prompt_run_id:
+          type: string
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    Message:
+      type: object
+      properties:
+        role:
+          type: string
+          example: user
+        content:
+          type: string
+          example: What is the capital of France?
     UpdateLogRequest:
       type: object
       description: Fields to update on an existing log.
@@ -175,39 +208,6 @@ components:
           type: object
         tool_calls:
           type: object
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-        message:
-          type: string
-    LogInferenceResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: success
-        prompt_run_id:
-          type: string
-    SuccessMessage:
-      type: object
-      properties:
-        status:
-          type: string
-          example: success
-        message:
-          type: string
-          example: Dataset rows added successfully
-    Message:
-      type: object
-      properties:
-        role:
-          type: string
-          example: user
-        content:
-          type: string
-          example: What is the capital of France?
   responses:
     Unauthorized:
       description: Missing or invalid athina-api-key.

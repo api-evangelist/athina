@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Athina AI Datasets Evaluations API
+  title: Athina AI Evaluations API
   description: REST API for the Athina AI LLM monitoring, evaluation, and experimentation platform. Log inferences and prompt runs, build traces and spans, manage datasets, run evaluations, and create, version, and run prompt templates. All requests authenticate with an `athina-api-key` header. Inference and prompt-run logging is served from the `https://log.athina.ai` host; all other resources are served from `https://api.athina.ai/api/v1`.
   termsOfService: https://www.athina.ai/terms
   contact:
@@ -42,6 +42,13 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid athina-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     RunEvalRequest:
       type: object
@@ -63,6 +70,22 @@ components:
         model:
           type: string
           description: Grader / evaluator model.
+    DatasetRow:
+      type: object
+      properties:
+        query:
+          type: string
+        context:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        response:
+          type: string
+        expected_response:
+          type: string
+      additionalProperties: true
     Error:
       type: object
       properties:
@@ -90,22 +113,6 @@ components:
                 type: number
               reason:
                 type: string
-    DatasetRow:
-      type: object
-      properties:
-        query:
-          type: string
-        context:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-        response:
-          type: string
-        expected_response:
-          type: string
-      additionalProperties: true
     EvalDefinition:
       type: object
       required:
@@ -120,13 +127,6 @@ components:
         config:
           type: object
           additionalProperties: true
-  responses:
-    Unauthorized:
-      description: Missing or invalid athina-api-key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     athinaApiKey:
       type: apiKey

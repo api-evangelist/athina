@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Athina AI Datasets Prompts API
+  title: Athina AI Prompts API
   description: REST API for the Athina AI LLM monitoring, evaluation, and experimentation platform. Log inferences and prompt runs, build traces and spans, manage datasets, run evaluations, and create, version, and run prompt templates. All requests authenticate with an `athina-api-key` header. Inference and prompt-run logging is served from the `https://log.athina.ai` host; all other resources are served from `https://api.athina.ai/api/v1`.
   termsOfService: https://www.athina.ai/terms
   contact:
@@ -106,6 +106,28 @@ components:
           $ref: '#/components/schemas/ModelParameters'
         commit_message:
           type: string
+    PromptTemplate:
+      type: object
+      properties:
+        slug:
+          type: string
+        version:
+          type: integer
+        prompt:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        model:
+          type: string
+        parameters:
+          $ref: '#/components/schemas/ModelParameters'
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
     RunPromptResponse:
       type: object
       properties:
@@ -124,13 +146,28 @@ components:
               type: number
             total_tokens:
               type: number
-    Error:
+    ModelParameters:
       type: object
       properties:
-        status:
+        temperature:
+          type: number
+        max_tokens:
+          type: integer
+        top_p:
+          type: number
+        presence_penalty:
+          type: number
+        frequency_penalty:
+          type: number
+    Message:
+      type: object
+      properties:
+        role:
           type: string
-        message:
+          example: user
+        content:
           type: string
+          example: What is the capital of France?
     RunPromptRequest:
       type: object
       required:
@@ -148,43 +185,19 @@ components:
           description: Optional model override.
         parameters:
           $ref: '#/components/schemas/ModelParameters'
-    ModelParameters:
-      type: object
-      properties:
-        temperature:
-          type: number
-        max_tokens:
-          type: integer
-        top_p:
-          type: number
-        presence_penalty:
-          type: number
-        frequency_penalty:
-          type: number
-    PromptTemplate:
-      type: object
-      properties:
-        slug:
-          type: string
-        version:
-          type: integer
-        prompt:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
-        model:
-          type: string
-        parameters:
-          $ref: '#/components/schemas/ModelParameters'
-    Message:
-      type: object
-      properties:
-        role:
-          type: string
-          example: user
-        content:
-          type: string
-          example: What is the capital of France?
+  responses:
+    Unauthorized:
+      description: Missing or invalid athina-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     PromptSlug:
       name: prompt_slug
@@ -192,19 +205,6 @@ components:
       required: true
       schema:
         type: string
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid athina-api-key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     athinaApiKey:
       type: apiKey
