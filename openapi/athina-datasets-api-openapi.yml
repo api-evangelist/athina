@@ -128,6 +128,86 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Message:
+      type: object
+      properties:
+        role:
+          type: string
+          example: user
+        content:
+          type: string
+          example: What is the capital of France?
+    CreateDatasetRequest:
+      type: object
+      required:
+      - source
+      - name
+      properties:
+        source:
+          type: string
+          example: api
+        name:
+          type: string
+        description:
+          type: string
+        language_model_id:
+          type: string
+        prompt_template:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        dataset_rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/DatasetRow'
+    SuccessMessage:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: Dataset rows added successfully
+    AddRowsRequest:
+      type: object
+      required:
+      - dataset_rows
+      properties:
+        dataset_rows:
+          type: array
+          maxItems: 1000
+          items:
+            $ref: '#/components/schemas/DatasetRow'
+    UpdateCellRequest:
+      type: object
+      required:
+      - row_no
+      - column_name
+      - value
+      properties:
+        row_no:
+          type: integer
+        column_name:
+          type: string
+        value:
+          type: string
+    DatasetRow:
+      type: object
+      properties:
+        query:
+          type: string
+        context:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        response:
+          type: string
+        expected_response:
+          type: string
+      additionalProperties: true
     Dataset:
       type: object
       properties:
@@ -155,41 +235,6 @@ components:
         updated_at:
           type: string
           format: date-time
-    SuccessMessage:
-      type: object
-      properties:
-        status:
-          type: string
-          example: success
-        message:
-          type: string
-          example: Dataset rows added successfully
-    AddRowsRequest:
-      type: object
-      required:
-      - dataset_rows
-      properties:
-        dataset_rows:
-          type: array
-          maxItems: 1000
-          items:
-            $ref: '#/components/schemas/DatasetRow'
-    DatasetRow:
-      type: object
-      properties:
-        query:
-          type: string
-        context:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-        response:
-          type: string
-        expected_response:
-          type: string
-      additionalProperties: true
     Error:
       type: object
       properties:
@@ -197,64 +242,6 @@ components:
           type: string
         message:
           type: string
-    Message:
-      type: object
-      properties:
-        role:
-          type: string
-          example: user
-        content:
-          type: string
-          example: What is the capital of France?
-    UpdateCellRequest:
-      type: object
-      required:
-      - row_no
-      - column_name
-      - value
-      properties:
-        row_no:
-          type: integer
-        column_name:
-          type: string
-        value:
-          type: string
-    CreateDatasetRequest:
-      type: object
-      required:
-      - source
-      - name
-      properties:
-        source:
-          type: string
-          example: api
-        name:
-          type: string
-        description:
-          type: string
-        language_model_id:
-          type: string
-        prompt_template:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
-        dataset_rows:
-          type: array
-          items:
-            $ref: '#/components/schemas/DatasetRow'
-  responses:
-    Unauthorized:
-      description: Missing or invalid athina-api-key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     DatasetId:
       name: dataset_id
@@ -262,6 +249,19 @@ components:
       required: true
       schema:
         type: string
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid athina-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     athinaApiKey:
       type: apiKey

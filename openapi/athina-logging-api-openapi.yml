@@ -97,30 +97,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    SuccessMessage:
-      type: object
-      properties:
-        status:
-          type: string
-          example: success
-        message:
-          type: string
-          example: Dataset rows added successfully
-    LogInferenceResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: success
-        prompt_run_id:
-          type: string
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-        message:
-          type: string
     Message:
       type: object
       properties:
@@ -130,18 +106,15 @@ components:
         content:
           type: string
           example: What is the capital of France?
-    UpdateLogRequest:
+    SuccessMessage:
       type: object
-      description: Fields to update on an existing log.
       properties:
-        expected_response:
+        status:
           type: string
-        context:
-          oneOf:
-          - type: string
-          - type: object
-        metadata:
-          type: object
+          example: success
+        message:
+          type: string
+          example: Dataset rows added successfully
     LogInferenceRequest:
       type: object
       required:
@@ -208,13 +181,33 @@ components:
           type: object
         tool_calls:
           type: object
-  responses:
-    Unauthorized:
-      description: Missing or invalid athina-api-key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    LogInferenceResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        prompt_run_id:
+          type: string
+    UpdateLogRequest:
+      type: object
+      description: Fields to update on an existing log.
+      properties:
+        expected_response:
+          type: string
+        context:
+          oneOf:
+          - type: string
+          - type: object
+        metadata:
+          type: object
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
   parameters:
     LogId:
       name: log_id
@@ -222,6 +215,13 @@ components:
       required: true
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid athina-api-key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     athinaApiKey:
       type: apiKey
