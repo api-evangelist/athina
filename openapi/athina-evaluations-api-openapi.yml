@@ -43,6 +43,20 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    EvalDefinition:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          example: DoesResponseAnswerQuery
+        type:
+          type: string
+          example: llm_grader
+        config:
+          type: object
+          additionalProperties: true
     RunEvalRequest:
       type: object
       required:
@@ -63,6 +77,29 @@ components:
         model:
           type: string
           description: Grader / evaluator model.
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    DatasetRow:
+      type: object
+      properties:
+        query:
+          type: string
+        context:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        response:
+          type: string
+        expected_response:
+          type: string
+      additionalProperties: true
     RunEvalResponse:
       type: object
       properties:
@@ -83,43 +120,6 @@ components:
                 type: number
               reason:
                 type: string
-    DatasetRow:
-      type: object
-      properties:
-        query:
-          type: string
-        context:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-        response:
-          type: string
-        expected_response:
-          type: string
-      additionalProperties: true
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-        message:
-          type: string
-    EvalDefinition:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          example: DoesResponseAnswerQuery
-        type:
-          type: string
-          example: llm_grader
-        config:
-          type: object
-          additionalProperties: true
   responses:
     Unauthorized:
       description: Missing or invalid athina-api-key.

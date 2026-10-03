@@ -89,43 +89,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    ModelParameters:
-      type: object
-      properties:
-        temperature:
-          type: number
-        max_tokens:
-          type: integer
-        top_p:
-          type: number
-        presence_penalty:
-          type: number
-        frequency_penalty:
-          type: number
-    Message:
-      type: object
-      properties:
-        role:
-          type: string
-          example: user
-        content:
-          type: string
-          example: What is the capital of France?
-    PromptTemplate:
-      type: object
-      properties:
-        slug:
-          type: string
-        version:
-          type: integer
-        prompt:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
-        model:
-          type: string
-        parameters:
-          $ref: '#/components/schemas/ModelParameters'
     RunPromptRequest:
       type: object
       required:
@@ -143,23 +106,34 @@ components:
           description: Optional model override.
         parameters:
           $ref: '#/components/schemas/ModelParameters'
-    CreatePromptRequest:
+    PromptTemplate:
       type: object
-      required:
-      - prompt
-      - model
       properties:
+        slug:
+          type: string
+        version:
+          type: integer
         prompt:
           type: array
           items:
             $ref: '#/components/schemas/Message'
         model:
           type: string
-          example: gpt-4o
         parameters:
           $ref: '#/components/schemas/ModelParameters'
-        commit_message:
-          type: string
+    ModelParameters:
+      type: object
+      properties:
+        temperature:
+          type: number
+        max_tokens:
+          type: integer
+        top_p:
+          type: number
+        presence_penalty:
+          type: number
+        frequency_penalty:
+          type: number
     RunPromptResponse:
       type: object
       properties:
@@ -178,6 +152,23 @@ components:
               type: number
             total_tokens:
               type: number
+    CreatePromptRequest:
+      type: object
+      required:
+      - prompt
+      - model
+      properties:
+        prompt:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        model:
+          type: string
+          example: gpt-4o
+        parameters:
+          $ref: '#/components/schemas/ModelParameters'
+        commit_message:
+          type: string
     Error:
       type: object
       properties:
@@ -185,15 +176,24 @@ components:
           type: string
         message:
           type: string
+    Message:
+      type: object
+      properties:
+        role:
+          type: string
+          example: user
+        content:
+          type: string
+          example: What is the capital of France?
   responses:
-    Unauthorized:
-      description: Missing or invalid athina-api-key.
+    NotFound:
+      description: Resource not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
+    Unauthorized:
+      description: Missing or invalid athina-api-key.
       content:
         application/json:
           schema:

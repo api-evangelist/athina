@@ -97,15 +97,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Message:
-      type: object
-      properties:
-        role:
-          type: string
-          example: user
-        content:
-          type: string
-          example: What is the capital of France?
     SuccessMessage:
       type: object
       properties:
@@ -115,6 +106,18 @@ components:
         message:
           type: string
           example: Dataset rows added successfully
+    UpdateLogRequest:
+      type: object
+      description: Fields to update on an existing log.
+      properties:
+        expected_response:
+          type: string
+        context:
+          oneOf:
+          - type: string
+          - type: object
+        metadata:
+          type: object
     LogInferenceRequest:
       type: object
       required:
@@ -189,18 +192,6 @@ components:
           example: success
         prompt_run_id:
           type: string
-    UpdateLogRequest:
-      type: object
-      description: Fields to update on an existing log.
-      properties:
-        expected_response:
-          type: string
-        context:
-          oneOf:
-          - type: string
-          - type: object
-        metadata:
-          type: object
     Error:
       type: object
       properties:
@@ -208,6 +199,15 @@ components:
           type: string
         message:
           type: string
+    Message:
+      type: object
+      properties:
+        role:
+          type: string
+          example: user
+        content:
+          type: string
+          example: What is the capital of France?
   parameters:
     LogId:
       name: log_id
