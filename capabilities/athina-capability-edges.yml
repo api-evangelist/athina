@@ -1,0 +1,34 @@
+slug: athina
+provider: Athina AI
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Evaluations
+  spec_file: athina-evaluations-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.8
+  evidence: POST /eval/run runEval — 'Run an evaluation'; schemas EvalDefinition, RunEvalRequest, RunEvalResponse
+  reason: Executes preset/custom evaluations against LLM outputs — model evaluation within the AI/ML lifecycle
+    (responsible AI / MLOps).
+- tag: Prompts
+  spec_file: athina-prompts-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.75
+  evidence: PUT /prompt/{prompt_slug} createPromptTemplate — 'Create or version a prompt template'; POST
+    /prompt/{prompt_slug}/run — 'Run a prompt'
+  reason: Versioning and execution of prompt templates is artefact lifecycle management for LLM applications,
+    sitting within AI/ML model lifecycle management.

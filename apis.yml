@@ -206,6 +206,9 @@ apis:
   - type: APIReference
     url: https://docs.athina.ai/prompts/run-prompt
 common:
+- type: CapabilityMap
+  url: capabilities/athina-capability-edges.yml
+  name: Athina AI Business Capability Map
 - type: AgenticAccess
   url: agentic-access/athina-agentic-access.yml
 - type: DomainSecurity
