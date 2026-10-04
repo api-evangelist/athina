@@ -155,6 +155,13 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
     UpdateSpanRequest:
       type: object
       properties:
@@ -168,9 +175,11 @@ components:
         end_time:
           type: string
           format: date-time
-    UpdateTraceRequest:
+    Trace:
       type: object
       properties:
+        id:
+          type: string
         name:
           type: string
         start_time:
@@ -179,6 +188,15 @@ components:
         end_time:
           type: string
           format: date-time
+        status:
+          type: string
+        attributes:
+          type: object
+          additionalProperties: true
+        spans:
+          type: array
+          items:
+            $ref: '#/components/schemas/Span'
     CreateSpanRequest:
       type: object
       required:
@@ -202,27 +220,9 @@ components:
         attributes:
           type: object
           additionalProperties: true
-    CreateTraceRequest:
-      type: object
-      required:
-      - name
-      - start_time
-      properties:
-        name:
-          type: string
-        start_time:
-          type: string
-          format: date-time
-        status:
-          type: string
-        attributes:
-          type: object
-          additionalProperties: true
-    Trace:
+    UpdateTraceRequest:
       type: object
       properties:
-        id:
-          type: string
         name:
           type: string
         start_time:
@@ -231,15 +231,6 @@ components:
         end_time:
           type: string
           format: date-time
-        status:
-          type: string
-        attributes:
-          type: object
-          additionalProperties: true
-        spans:
-          type: array
-          items:
-            $ref: '#/components/schemas/Span'
     Span:
       type: object
       properties:
@@ -262,39 +253,48 @@ components:
         attributes:
           type: object
           additionalProperties: true
-    Error:
+    CreateTraceRequest:
       type: object
+      required:
+      - name
+      - start_time
       properties:
+        name:
+          type: string
+        start_time:
+          type: string
+          format: date-time
         status:
           type: string
-        message:
-          type: string
-  parameters:
-    TraceId:
-      name: trace_id
-      in: path
-      required: true
-      schema:
-        type: string
-    SpanId:
-      name: span_id
-      in: path
-      required: true
-      schema:
-        type: string
+        attributes:
+          type: object
+          additionalProperties: true
   responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Missing or invalid athina-api-key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    SpanId:
+      name: span_id
+      in: path
+      required: true
+      schema:
+        type: string
+    TraceId:
+      name: trace_id
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     athinaApiKey:
       type: apiKey

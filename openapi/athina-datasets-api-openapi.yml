@@ -128,6 +128,36 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    CreateDatasetRequest:
+      type: object
+      required:
+      - source
+      - name
+      properties:
+        source:
+          type: string
+          example: api
+        name:
+          type: string
+        description:
+          type: string
+        language_model_id:
+          type: string
+        prompt_template:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        dataset_rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/DatasetRow'
     SuccessMessage:
       type: object
       properties:
@@ -137,16 +167,44 @@ components:
         message:
           type: string
           example: Dataset rows added successfully
-    AddRowsRequest:
+    DatasetRow:
+      type: object
+      properties:
+        query:
+          type: string
+        context:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: string
+        response:
+          type: string
+        expected_response:
+          type: string
+      additionalProperties: true
+    Message:
+      type: object
+      properties:
+        role:
+          type: string
+          example: user
+        content:
+          type: string
+          example: What is the capital of France?
+    UpdateCellRequest:
       type: object
       required:
-      - dataset_rows
+      - row_no
+      - column_name
+      - value
       properties:
-        dataset_rows:
-          type: array
-          maxItems: 1000
-          items:
-            $ref: '#/components/schemas/DatasetRow'
+        row_no:
+          type: integer
+        column_name:
+          type: string
+        value:
+          type: string
     Dataset:
       type: object
       properties:
@@ -174,83 +232,25 @@ components:
         updated_at:
           type: string
           format: date-time
-    UpdateCellRequest:
+    AddRowsRequest:
       type: object
       required:
-      - row_no
-      - column_name
-      - value
+      - dataset_rows
       properties:
-        row_no:
-          type: integer
-        column_name:
-          type: string
-        value:
-          type: string
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-        message:
-          type: string
-    Message:
-      type: object
-      properties:
-        role:
-          type: string
-          example: user
-        content:
-          type: string
-          example: What is the capital of France?
-    DatasetRow:
-      type: object
-      properties:
-        query:
-          type: string
-        context:
-          oneOf:
-          - type: string
-          - type: array
-            items:
-              type: string
-        response:
-          type: string
-        expected_response:
-          type: string
-      additionalProperties: true
-    CreateDatasetRequest:
-      type: object
-      required:
-      - source
-      - name
-      properties:
-        source:
-          type: string
-          example: api
-        name:
-          type: string
-        description:
-          type: string
-        language_model_id:
-          type: string
-        prompt_template:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
         dataset_rows:
           type: array
+          maxItems: 1000
           items:
             $ref: '#/components/schemas/DatasetRow'
   responses:
-    NotFound:
-      description: Resource not found.
+    Unauthorized:
+      description: Missing or invalid athina-api-key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid athina-api-key.
+    NotFound:
+      description: Resource not found.
       content:
         application/json:
           schema:

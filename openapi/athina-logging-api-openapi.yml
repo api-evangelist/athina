@@ -97,15 +97,13 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    SuccessMessage:
+    Error:
       type: object
       properties:
         status:
           type: string
-          example: success
         message:
           type: string
-          example: Dataset rows added successfully
     UpdateLogRequest:
       type: object
       description: Fields to update on an existing log.
@@ -192,13 +190,6 @@ components:
           example: success
         prompt_run_id:
           type: string
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-        message:
-          type: string
     Message:
       type: object
       properties:
@@ -208,6 +199,15 @@ components:
         content:
           type: string
           example: What is the capital of France?
+    SuccessMessage:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: Dataset rows added successfully
   parameters:
     LogId:
       name: log_id

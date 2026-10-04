@@ -89,6 +89,13 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
     RunPromptRequest:
       type: object
       required:
@@ -104,21 +111,6 @@ components:
         model:
           type: string
           description: Optional model override.
-        parameters:
-          $ref: '#/components/schemas/ModelParameters'
-    PromptTemplate:
-      type: object
-      properties:
-        slug:
-          type: string
-        version:
-          type: integer
-        prompt:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
-        model:
-          type: string
         parameters:
           $ref: '#/components/schemas/ModelParameters'
     ModelParameters:
@@ -152,6 +144,21 @@ components:
               type: number
             total_tokens:
               type: number
+    PromptTemplate:
+      type: object
+      properties:
+        slug:
+          type: string
+        version:
+          type: integer
+        prompt:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        model:
+          type: string
+        parameters:
+          $ref: '#/components/schemas/ModelParameters'
     CreatePromptRequest:
       type: object
       required:
@@ -169,13 +176,6 @@ components:
           $ref: '#/components/schemas/ModelParameters'
         commit_message:
           type: string
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-        message:
-          type: string
     Message:
       type: object
       properties:
@@ -186,14 +186,14 @@ components:
           type: string
           example: What is the capital of France?
   responses:
-    NotFound:
-      description: Resource not found.
+    Unauthorized:
+      description: Missing or invalid athina-api-key.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid athina-api-key.
+    NotFound:
+      description: Resource not found.
       content:
         application/json:
           schema:
