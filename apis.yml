@@ -50,7 +50,7 @@ tags_raw:
 - Evaluation
 - Monitoring
 created: '2026-06-20'
-modified: '2026-06-20'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: athina:athina-datasets-api
@@ -206,6 +206,8 @@ apis:
   - type: APIReference
     url: https://docs.athina.ai/prompts/run-prompt
 common:
+- url: https://blog.athina.ai/_feather/rss.xml
+  type: BlogRSS
 - type: CapabilityMap
   url: capabilities/athina-capability-edges.yml
   name: Athina AI Business Capability Map
