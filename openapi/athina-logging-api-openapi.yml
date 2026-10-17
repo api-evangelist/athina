@@ -97,12 +97,38 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Message:
+      type: object
+      properties:
+        role:
+          type: string
+          example: user
+        content:
+          type: string
+          example: What is the capital of France?
     Error:
       type: object
       properties:
         status:
           type: string
         message:
+          type: string
+    SuccessMessage:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        message:
+          type: string
+          example: Dataset rows added successfully
+    LogInferenceResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        prompt_run_id:
           type: string
     UpdateLogRequest:
       type: object
@@ -182,39 +208,6 @@ components:
           type: object
         tool_calls:
           type: object
-    LogInferenceResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: success
-        prompt_run_id:
-          type: string
-    Message:
-      type: object
-      properties:
-        role:
-          type: string
-          example: user
-        content:
-          type: string
-          example: What is the capital of France?
-    SuccessMessage:
-      type: object
-      properties:
-        status:
-          type: string
-          example: success
-        message:
-          type: string
-          example: Dataset rows added successfully
-  parameters:
-    LogId:
-      name: log_id
-      in: path
-      required: true
-      schema:
-        type: string
   responses:
     Unauthorized:
       description: Missing or invalid athina-api-key.
@@ -222,6 +215,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    LogId:
+      name: log_id
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     athinaApiKey:
       type: apiKey

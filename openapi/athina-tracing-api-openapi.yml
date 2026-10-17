@@ -155,26 +155,22 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
+    CreateTraceRequest:
       type: object
-      properties:
-        status:
-          type: string
-        message:
-          type: string
-    UpdateSpanRequest:
-      type: object
+      required:
+      - name
+      - start_time
       properties:
         name:
-          type: string
-        span_type:
           type: string
         start_time:
           type: string
           format: date-time
-        end_time:
+        status:
           type: string
-          format: date-time
+        attributes:
+          type: object
+          additionalProperties: true
     Trace:
       type: object
       properties:
@@ -197,6 +193,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Span'
+    UpdateSpanRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        span_type:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
     CreateSpanRequest:
       type: object
       required:
@@ -220,17 +236,6 @@ components:
         attributes:
           type: object
           additionalProperties: true
-    UpdateTraceRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        start_time:
-          type: string
-          format: date-time
-        end_time:
-          type: string
-          format: date-time
     Span:
       type: object
       properties:
@@ -253,22 +258,30 @@ components:
         attributes:
           type: object
           additionalProperties: true
-    CreateTraceRequest:
+    UpdateTraceRequest:
       type: object
-      required:
-      - name
-      - start_time
       properties:
         name:
           type: string
         start_time:
           type: string
           format: date-time
-        status:
+        end_time:
           type: string
-        attributes:
-          type: object
-          additionalProperties: true
+          format: date-time
+  parameters:
+    TraceId:
+      name: trace_id
+      in: path
+      required: true
+      schema:
+        type: string
+    SpanId:
+      name: span_id
+      in: path
+      required: true
+      schema:
+        type: string
   responses:
     Unauthorized:
       description: Missing or invalid athina-api-key.
@@ -282,19 +295,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    SpanId:
-      name: span_id
-      in: path
-      required: true
-      schema:
-        type: string
-    TraceId:
-      name: trace_id
-      in: path
-      required: true
-      schema:
-        type: string
   securitySchemes:
     athinaApiKey:
       type: apiKey

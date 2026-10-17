@@ -70,26 +70,6 @@ components:
         model:
           type: string
           description: Grader / evaluator model.
-    RunEvalResponse:
-      type: object
-      properties:
-        eval_request_id:
-          type: string
-        status:
-          type: string
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              eval_name:
-                type: string
-              passed:
-                type: boolean
-              score:
-                type: number
-              reason:
-                type: string
     DatasetRow:
       type: object
       properties:
@@ -120,6 +100,26 @@ components:
         config:
           type: object
           additionalProperties: true
+    RunEvalResponse:
+      type: object
+      properties:
+        eval_request_id:
+          type: string
+        status:
+          type: string
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              eval_name:
+                type: string
+              passed:
+                type: boolean
+              score:
+                type: number
+              reason:
+                type: string
   responses:
     Unauthorized:
       description: Missing or invalid athina-api-key.

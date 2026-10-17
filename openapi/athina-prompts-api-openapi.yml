@@ -89,6 +89,30 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    PromptTemplate:
+      type: object
+      properties:
+        slug:
+          type: string
+        version:
+          type: integer
+        prompt:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        model:
+          type: string
+        parameters:
+          $ref: '#/components/schemas/ModelParameters'
+    Message:
+      type: object
+      properties:
+        role:
+          type: string
+          example: user
+        content:
+          type: string
+          example: What is the capital of France?
     Error:
       type: object
       properties:
@@ -96,23 +120,6 @@ components:
           type: string
         message:
           type: string
-    RunPromptRequest:
-      type: object
-      required:
-      - variables
-      properties:
-        variables:
-          type: object
-          additionalProperties: true
-          description: Input values substituted into the prompt template.
-        version:
-          type: integer
-          description: Optional prompt version; defaults to the default version.
-        model:
-          type: string
-          description: Optional model override.
-        parameters:
-          $ref: '#/components/schemas/ModelParameters'
     ModelParameters:
       type: object
       properties:
@@ -144,21 +151,6 @@ components:
               type: number
             total_tokens:
               type: number
-    PromptTemplate:
-      type: object
-      properties:
-        slug:
-          type: string
-        version:
-          type: integer
-        prompt:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
-        model:
-          type: string
-        parameters:
-          $ref: '#/components/schemas/ModelParameters'
     CreatePromptRequest:
       type: object
       required:
@@ -176,15 +168,23 @@ components:
           $ref: '#/components/schemas/ModelParameters'
         commit_message:
           type: string
-    Message:
+    RunPromptRequest:
       type: object
+      required:
+      - variables
       properties:
-        role:
+        variables:
+          type: object
+          additionalProperties: true
+          description: Input values substituted into the prompt template.
+        version:
+          type: integer
+          description: Optional prompt version; defaults to the default version.
+        model:
           type: string
-          example: user
-        content:
-          type: string
-          example: What is the capital of France?
+          description: Optional model override.
+        parameters:
+          $ref: '#/components/schemas/ModelParameters'
   responses:
     Unauthorized:
       description: Missing or invalid athina-api-key.
