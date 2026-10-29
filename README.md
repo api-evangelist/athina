@@ -1,4 +1,4 @@
-# Athina AI (athina)
+# Athina AI
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,140 +66,124 @@
 
 Athina AI is an LLM monitoring, evaluation, and experimentation platform for building production-grade AI applications. Its REST API lets teams log inferences and traces, manage datasets, run 50+ preset and custom evaluations, version and run prompt templates, and collaborate on experiments across the full LLM development lifecycle.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/athina/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/athina/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · LLM · Observability · Evaluation · Monitoring
 
-## Tags
+## Athina AI on APIs.io
 
-- AI
-- LLM
-- Observability
-- Evaluation
-- Monitoring
+Everything profiled for Athina AI is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/athina/](https://apis.io/providers/athina/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (5)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [Athina AI Datasets API](https://apis.io/apis/athina/athina-datasets-api/) — Create and manage datasets used for evals and experiments.
+- [Athina AI Evaluations API](https://apis.io/apis/athina/athina-evaluations-api/) — Run evaluations against datasets and logged inferences.
+- [Athina AI Logging API](https://apis.io/apis/athina/athina-logging-api/) — Log LLM inferences and prompt runs.
+- [Athina AI Prompts API](https://apis.io/apis/athina/athina-prompts-api/) — Create, version, fetch, and run prompt templates.
+- [Athina AI Tracing API](https://apis.io/apis/athina/athina-tracing-api/) — Create and manage traces and spans.
 
-## APIs
+### Published properties
 
-### Athina Logging & Inferences API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Log LLM inferences and prompt runs (prompt, response, model, tokens, cost, context, customer/session metadata), update logs by id or external reference, and build nested traces with spans for end-to-end observability.
+#### Agentic access (1)
 
-- **Human URL:** [https://docs.athina.ai/api-reference/logging/log-via-api-request](https://docs.athina.ai/api-reference/logging/log-via-api-request)
-- **Base URL:** `https://api.athina.ai/api/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Athina Agentic Access](https://apis.io/agentic-access/athina/athina-agentic-access/)
 
-- Logging
-- Inferences
-- Tracing
-- Observability
+#### Collections (6)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://docs.athina.ai/api-reference/logging/log-via-api-request)
-- [API Reference](https://docs.athina.ai/api-reference/logging/tracing-via-api)
-- [OpenAPI](openapi/athina-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/athina.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/athina.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Athina AI API](https://apis.io/collections/athina/open-athina/)
+- [Athina AI Datasets API](https://apis.io/collections/athina/open-athina-datasets-api/)
+- [Athina AI Datasets Evaluations API](https://apis.io/collections/athina/open-athina-evaluations-api/)
+- [Athina AI Datasets Logging API](https://apis.io/collections/athina/open-athina-logging-api/)
+- [Athina AI Datasets Prompts API](https://apis.io/collections/athina/open-athina-prompts-api/)
+- [Athina AI Datasets Tracing API](https://apis.io/collections/athina/open-athina-tracing-api/)
 
-### Athina Datasets API
+#### Security (2)
 
-Create datasets, list and retrieve datasets, add up to 1000 rows (query, context, response, expected_response and custom fields), update individual cells, and delete datasets used as inputs for evaluations and experiments.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://docs.athina.ai/api-reference/datasets/create-dataset](https://docs.athina.ai/api-reference/datasets/create-dataset)
-- **Base URL:** `https://api.athina.ai/api/v1`
+- [Athina Authentication](https://apis.io/security/athina/athina-authentication/)
+- [Athina Domain Security](https://apis.io/security/athina/athina-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Datasets
-- Data Management
-- Evaluation Data
+Published plans, tiers and prices.
 
-#### Properties
+- [Athina Plans Pricing](https://apis.io/plans/athina/athina-plans-pricing/)
 
-- [Documentation](https://docs.athina.ai/api-reference/datasets/create-dataset)
-- [API Reference](https://docs.athina.ai/api-reference/datasets/add-rows-to-dataset)
-- [OpenAPI](openapi/athina-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/athina.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/athina.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Athina Evaluations API
+Published request limits.
 
-Run single evaluations or suites of 50+ preset and custom evals (RAG, summarization, function-calling, safety) against datasets and logged inferences, with results surfaced in the Athina platform.
+- [Athina Rate Limits](https://apis.io/rate-limits/athina/athina-rate-limits/)
 
-- **Human URL:** [https://docs.athina.ai/api-reference/evals/preset-evals/overview](https://docs.athina.ai/api-reference/evals/preset-evals/overview)
-- **Base URL:** `https://api.athina.ai/api/v1`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Evaluation
-- Evals
-- Quality
+- [Athina Finops](https://apis.io/finops/athina/athina-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://docs.athina.ai/api-reference/evals/preset-evals/overview)
-- [API Reference](https://docs.athina.ai/api-reference/evals/running-evals/run-single-eval)
-- [OpenAPI](openapi/athina-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/athina.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/athina.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Athina Prompts API
-
-Create and version prompt templates by slug, fetch the default version, and run a prompt by slug with input variables, model, and parameters (temperature, max_tokens, top_p, penalties) for managed prompt execution.
-
-- **Human URL:** [https://docs.athina.ai/prompts/overview](https://docs.athina.ai/prompts/overview)
-- **Base URL:** `https://api.athina.ai/api/v1`
-
-#### Tags
-
-- Prompts
-- Prompt Management
-- Versioning
-
-#### Properties
-
-- [Documentation](https://docs.athina.ai/prompts/overview)
-- [API Reference](https://docs.athina.ai/prompts/run-prompt)
-- [OpenAPI](openapi/athina-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/athina.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/athina.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Athina Experiments API
-
-Compare prompts, models, and parameters across datasets by combining versioned prompt runs with evaluations, enabling side-by-side experimentation over the prompt and dataset APIs.
-
-- **Human URL:** [https://docs.athina.ai/prompts/overview](https://docs.athina.ai/prompts/overview)
-- **Base URL:** `https://api.athina.ai/api/v1`
-
-#### Tags
-
-- Experiments
-- Comparison
-- Prompt Engineering
-
-#### Properties
-
-- [Documentation](https://docs.athina.ai/prompts/overview)
-- [API Reference](https://docs.athina.ai/prompts/run-prompt)
-- [OpenAPI](openapi/athina-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/athina.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/athina.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/athina-ai)
-- [LinkedIn](https://www.linkedin.com/company/athina-ai)
 - [Website](https://www.athina.ai)
 - [Documentation](https://docs.athina.ai)
-- [Plans](plans/athina-plans-pricing.yml)
-- [Rate Limits](rate-limits/athina-rate-limits.yml)
-- [Fin Ops](finops/athina-finops.yml)
+- [Blog](https://blog.athina.ai/rss.xml)
+- [GitHub](https://github.com/athina-ai)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 27.6** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 52.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/athina/](https://apis.io/providers/athina/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Athina AI: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/athina/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
